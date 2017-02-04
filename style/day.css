@@ -1,0 +1,14 @@
+* {
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
+
+#eliminating-questions p {
+    margin-top: 10px;
+}
+
+#eliminating-questions small {
+    color: gray;
+    display: block;
+}
