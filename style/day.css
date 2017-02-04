@@ -12,3 +12,31 @@
     color: gray;
     display: block;
 }
+
+div.question  {
+    margin-bottom: 20px;
+}
+
+.question > div {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.question .question-title {
+    padding: 5px;
+    border: solid 1px #F48FB1;
+    background-color: #FCE4EC;
+}
+
+.question .answers {
+    padding: 5px;
+    border: solid 1px #FFC107;
+    background-color: #FFF8E1;
+}
+
+.question .note {
+    padding: 5px;
+    border: solid 1px #FF5722;
+    background-color: #FFCCBC;
+    min-height: 75px;
+}

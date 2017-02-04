@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {nextStep} from '../../actions/index';
 
-export default class S0 extends Component {
+class S0 extends Component {
     render() {
+        console.log('Fs', this.props.allFrameworks.map(i => i.name));
         return(
             <div>
                 <div className="col-md-8">
@@ -210,7 +213,9 @@ export default class S0 extends Component {
                     </div>
 
                     <div>
-                        <button className="btn btn-success">
+                        <button
+                            className="btn btn-success"
+                            onClick={() => this.props.nextStep(this.props.currentStep)}>
                             Let's start!
                             <span className="glyphicon glyphicon-play"></span>
                         </button>
@@ -218,10 +223,19 @@ export default class S0 extends Component {
                 </div>
                 <div className="col-md-4">
                     <div className="well">
-                        Currently there are {0} frameworks in our database.
+                        Currently there are {this.props.allFrameworks.length} frameworks in our database.
                     </div>
                 </div>
             </div>
         );
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        allFrameworks: state.allFrameworks,
+        currentStep: state.currentStep
+    }
+}
+
+export default connect(mapStateToProps, { nextStep: nextStep })(S0);
