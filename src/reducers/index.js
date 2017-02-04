@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
+import CurrentStepReducer from './current-step-reducer';
 
 const rootReducer = combineReducers({
-  state: (state = {}) => state
+    currentStep: CurrentStepReducer
 });
 
 export default rootReducer;
