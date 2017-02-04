@@ -1,7 +1,7 @@
 {
   "name": "diploma-web",
   "version": "1.0.0",
-  "description": "A ReactJS application for diploma thesis",
+  "description": "React web project for multi-platform selection tool",
   "main": "index.js",
   "repository": "git@github.com:Rimobul/DiplomaWeb.git",
   "scripts": {
@@ -9,7 +9,7 @@
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch"
   },
-  "author": "Ľubomír Sokolovský",
+  "author": "",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.2.1",
