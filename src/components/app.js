@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import S0 from './steps/s0';
 import S1 from './steps/s1';
+import S2 from './steps/s2';
 
 class App extends Component {
     render() {
@@ -10,6 +11,8 @@ class App extends Component {
                 return <S0 />;
             case 1:
                 return <S1 />;
+            case 2:
+                return <S2 />;
         };
     }
 }

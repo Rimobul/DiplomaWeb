@@ -4,7 +4,6 @@ import {nextStep} from '../../actions/index';
 
 class S0 extends Component {
     render() {
-        console.log('Fs', this.props.allFrameworks.map(i => i.name));
         return(
             <div>
                 <div className="col-md-8">
