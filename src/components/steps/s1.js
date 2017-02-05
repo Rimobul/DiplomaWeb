@@ -140,7 +140,7 @@ class S1 extends Component {
 
     render() {
         const filteredFrameworks = this.getSuitableFrameworks();
-        console.log('S1', filteredFrameworks.map(f => f.name), this.state, filteredFrameworks);
+        //console.log('S1', filteredFrameworks.map(f => f.name), this.state, filteredFrameworks);
 
         return (
             <div>

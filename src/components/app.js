@@ -4,6 +4,7 @@ import S0 from './steps/s0';
 import S1 from './steps/s1';
 import S2 from './steps/s2';
 import S3 from './steps/s3';
+import S4 from './steps/s4';
 
 class App extends Component {
     render() {
@@ -16,6 +17,8 @@ class App extends Component {
                 return <S2 />;
             case 3:
                 return <S3 />;
+            case 4:
+                return <S4 />;
         };
     }
 }

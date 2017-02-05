@@ -21,7 +21,7 @@ class S2 extends Component {
             deviceState: false
         };
 
-        console.log('S2 ctor', props.filteredFrameworks);
+        //console.log('S2 ctor', props.filteredFrameworks);
     }
 
     getSuitableFrameworks() {
@@ -83,7 +83,7 @@ class S2 extends Component {
 
     render() {
         const filteredFrameworks = this.getSuitableFrameworks();
-        console.log('S2', filteredFrameworks.map(f => f.name), this.state, filteredFrameworks, this.props.filteredFrameworks);
+        //console.log('S2', filteredFrameworks.map(f => f.name), this.state, filteredFrameworks, this.props.filteredFrameworks);
 
         return (
             <div>
@@ -252,7 +252,7 @@ class S2 extends Component {
                             this.props.nextStep(this.props.currentStep)
                         }}>
                         Continue
-                        <span className="glyphicon glyphicon-play"></span>
+                        <span className="glyphicon glyphicon-play" />
                     </button>
                 </div>
             </div>
