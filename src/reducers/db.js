@@ -40,6 +40,7 @@ export const FrameworksArray = [
         name: "Alpha Anywhere",
         web: "https://www.alphasoftware.com/mobile-app-development/",
         score: 0,
+        performance: 0,
         apis: {
             audio: [true],
             video: [true],
@@ -118,6 +119,7 @@ export const FrameworksArray = [
         name: "Appcelerator",
         web: "https://www.appcelerator.com/",
         score: 0,
+        performance: 1,
         apis: {
             audio: [true],
             video: [true],
@@ -196,6 +198,7 @@ export const FrameworksArray = [
         name: "Appery.io",
         web: "https://appery.io/",
         score: 0,
+        performance: 0,
         apis: {
             audio: [true],
             video: [true],
@@ -274,6 +277,7 @@ export const FrameworksArray = [
         name: "Aquro",
         web: "http://www.aquro.com/",
         score: 0,
+        performance: 0,
         apis: {
             audio: [true],
             video: [true],
@@ -352,6 +356,7 @@ export const FrameworksArray = [
         name: "Codename One",
         web: "https://www.codenameone.com/",
         score: 0,
+        performance: 2,
         apis: {
             audio: [true],
             video: [true],
@@ -430,6 +435,7 @@ export const FrameworksArray = [
         name: "Corona Labs",
         web: "https://coronalabs.com/",
         score: 0,
+        performance: 1,
         apis: {
             audio: [true],
             video: [true],
@@ -508,6 +514,7 @@ export const FrameworksArray = [
         name: "Embarcadero",
         web: "https://www.embarcadero.com/",
         score: 0,
+        performance: 2,
         apis: {
             audio: [true],
             video: [true],
@@ -586,6 +593,7 @@ export const FrameworksArray = [
         name: "Instant Developer",
         web: "http://www.instantdeveloper.com/",
         score: 0,
+        performance: 0,
         apis: {
             audio: [true],
             video: [false],
@@ -664,6 +672,7 @@ export const FrameworksArray = [
         name: "Ionic",
         web: "http://ionicframework.com/",
         score: 0,
+        performance: 1,
         apis: {
             audio: [true],
             video: [true],
@@ -742,6 +751,7 @@ export const FrameworksArray = [
         name: "Kivy",
         web: "https://kivy.org/#home",
         score: 0,
+        performance: 0,
         apis: {
             audio: [null, custom3],
             video: [true],
@@ -820,6 +830,7 @@ export const FrameworksArray = [
         name: "Kony",
         web: "http://www.kony.com/",
         score: 0,
+        performance: 1,
         apis: {
             audio: [true],
             video: [true],
@@ -898,6 +909,7 @@ export const FrameworksArray = [
         name: "NativeScript",
         web: "https://www.nativescript.org/",
         score: 0,
+        performance: 1,
         apis: {
             audio: [true],
             video: [null, custom3],
@@ -976,6 +988,7 @@ export const FrameworksArray = [
         name: "NeoMAD",
         web: "http://neomades.com/",
         score: 0,
+        performance: 1,
         apis: {
             audio: [true],
             video: [true],
@@ -1054,6 +1067,7 @@ export const FrameworksArray = [
         name: "NS Basic",
         web: "https://www.nsbasic.com/",
         score: 0,
+        performance: 0,
         apis: {
             audio: [true],
             video: [true],
@@ -1132,6 +1146,7 @@ export const FrameworksArray = [
         name: "PhoneGap",
         web: "http://phonegap.com/",
         score: 0,
+        performance: 0,
         apis: {
             audio: [true],
             video: [true],
@@ -1210,6 +1225,7 @@ export const FrameworksArray = [
         name: "Qt",
         web: "https://www.qt.io/",
         score: 0,
+        performance: 2,
         apis: {
             audio: [true],
             video: [true],
@@ -1288,6 +1304,7 @@ export const FrameworksArray = [
         name: "React Native",
         web: "https://facebook.github.io/react-native/",
         score: 0,
+        performance: 1,
         apis: {
             audio: [true],
             video: [null, custom3],
@@ -1366,6 +1383,7 @@ export const FrameworksArray = [
         name: "RubyMotion",
         web: "http://www.rubymotion.com/",
         score: 0,
+        performance: 2,
         apis: {
             audio: [true],
             video: [true],
@@ -1444,6 +1462,7 @@ export const FrameworksArray = [
         name: "Smartface",
         web: "https://www.smartface.io/smartface/",
         score: 0,
+        performance: 0,
         apis: {
             audio: [true],
             video: [true],
@@ -1522,6 +1541,7 @@ export const FrameworksArray = [
         name: "Tabris.js",
         web: "https://tabrisjs.com/",
         score: 0,
+        performance: 1,
         apis: {
             audio: [true],
             video: [true],
@@ -1600,6 +1620,7 @@ export const FrameworksArray = [
         name: "Telerik Platform",
         web: "http://www.telerik.com/platform",
         score: 0,
+        performance: 0,
         apis: {
             audio: [true],
             video: [true],
@@ -1678,6 +1699,7 @@ export const FrameworksArray = [
         name: "ViziApps",
         web: "http://www.viziapps.com/",
         score: 0,
+        performance: 0,
         apis: {
             audio: [true],
             video: [true],
@@ -1756,6 +1778,7 @@ export const FrameworksArray = [
         name: "Xamarin",
         web: "https://www.xamarin.com/",
         score: 0,
+        performance: 2,
         apis: {
             audio: [true],
             video: [true],

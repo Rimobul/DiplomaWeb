@@ -23,8 +23,6 @@ class S1 extends Component {
         }
     }
 
-    filteredFrameworks = [];
-
     satisfiesPriceLimit(framework, teamSize, priceLimit){
         let realPrice = 0;
         switch (teamSize) {
@@ -55,16 +53,20 @@ class S1 extends Component {
         }
     }
 
+    canBeDevelopedOnSelectedDesktop(framework) {
+        return (this.state.linux && isNullOrTrue(framework.desktopOs.linux[0])) ||
+            (this.state.macOs && isNullOrTrue(framework.desktopOs.macOs[0])) ||
+            (this.state.windows && isNullOrTrue(framework.desktopOs.windows[0])) ||
+            (this.state.web && isNullOrTrue(framework.desktopOs.web[0]));
+    }
+
     getSuitableFrameworks(){
         return this.props.allFrameworks.filter(f =>
             (!this.state.android || isNullOrTrue(f.mobileOs.android[0])) &&
             (!this.state.ios || isNullOrTrue(f.mobileOs.ios[0])) &&
             (!this.state.blackBerry || isNullOrTrue(f.mobileOs.blackBerry[0])) &&
             (!this.state.windowsPhone || isNullOrTrue(f.mobileOs.windows[0])) &&
-            (!this.state.linux || isNullOrTrue(f.desktopOs.linux[0])) &&
-            (!this.state.macOs || isNullOrTrue(f.desktopOs.macOs[0])) &&
-            (!this.state.windows || isNullOrTrue(f.desktopOs.windows[0])) &&
-            (!this.state.web || isNullOrTrue(f.desktopOs.web[0])) &&
+            this.canBeDevelopedOnSelectedDesktop(f) &&
             (!this.state.iOSnonMac || isNullOrTrue(f.desktopOs.iOSnonMac[0])) &&
             (!this.state.winNonWin || isNullOrTrue(f.desktopOs.winNonWin[0])) &&
             (this.satisfiesPriceLimit(f, this.state.size, this.state.price))
@@ -137,11 +139,12 @@ class S1 extends Component {
     }
 
     render() {
-        this.filteredFrameworks = this.getSuitableFrameworks();
+        const filteredFrameworks = this.getSuitableFrameworks();
+        console.log('S1', filteredFrameworks.map(f => f.name), this.state, filteredFrameworks);
 
         return (
             <div>
-                {this.filteredFrameworks.length} frameworks satisfy your requirements.
+                {filteredFrameworks.length} frameworks satisfy your requirements.
 
                 <div className="question">
                     <div className="col-md-8">
@@ -159,11 +162,14 @@ class S1 extends Component {
                                 BlackBerry<br/>
                             <input type="checkbox"
                                    checked={this.state.ios}
-                                   onClick={() => this.setState({ios: !this.state.ios})} />
+                                   onClick={() => this.setState({ios: !this.state.ios, iOSnonMac: false })} />
                                 iOS<br/>
                             <input type="checkbox"
                                    checked={this.state.windowsPhone}
-                                   onClick={() => this.setState({windowsPhone: !this.state.windowsPhone})} />
+                                   onClick={() => this.setState({
+                                       windowsPhone: !this.state.windowsPhone,
+                                       winNonWin: false
+                                   })} />
                                 Windows<br/>
                         </div>
                     </div>
@@ -187,11 +193,11 @@ class S1 extends Component {
                                 Linux<br />
                             <input type="checkbox"
                                    checked={this.state.macOs}
-                                   onClick={() => this.setState({macOs: !this.state.macOs})}/>
+                                   onClick={() => this.setState({macOs: !this.state.macOs, iOSnonMac: false})}/>
                                 macOS<br/>
                             <input type="checkbox"
                                    checked={this.state.windows}
-                                   onClick={() => this.setState({windows: !this.state.windows})} />
+                                   onClick={() => this.setState({windows: !this.state.windows, winNonWin: false})} />
                                 Windows<br/>
                             <input type="checkbox"
                                    checked={this.state.web}
