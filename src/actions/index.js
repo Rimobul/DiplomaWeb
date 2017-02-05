@@ -8,6 +8,13 @@ export function nextStep(currentStep) {
     };
 }
 
+export function resetSteps() {
+    return {
+        type: CURRENT_STEP,
+        payload: 0
+    };
+}
+
 export function filterFrameworks(filteredArray) {
     return {
         type: FILTER_FRAMEWORKS,

@@ -40,3 +40,14 @@
     background-color: #FFCCBC;
     min-height: 75px;
 }
+
+.thumbnail .box-logo {
+    height: 350px;
+    display: flex;
+    align-items: center;
+}
+
+.thumbnail .box-logo img {
+    max-width: 350px;
+    max-height: 350px;
+}

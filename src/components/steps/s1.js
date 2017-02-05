@@ -23,6 +23,10 @@ class S1 extends Component {
         }
     }
 
+    componentDidMount () {
+        window.scrollTo(0, 0)
+    }
+
     satisfiesPriceLimit(framework, teamSize, priceLimit){
         let realPrice = 0;
         switch (teamSize) {

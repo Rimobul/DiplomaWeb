@@ -39,6 +39,7 @@ export const FrameworksArray = [
     {
         name: "Alpha Anywhere",
         web: "https://www.alphasoftware.com/mobile-app-development/",
+        image: "https://www.alphasoftware.com/blog/wp-content/uploads/2014/10/alpha-software-logo-2.png",
         score: 0,
         performance: 0,
         apis: {
@@ -118,6 +119,7 @@ export const FrameworksArray = [
     {
         name: "Appcelerator",
         web: "https://www.appcelerator.com/",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Appcelerator_logo.svg/440px-Appcelerator_logo.svg.png",
         score: 0,
         performance: 1,
         apis: {
@@ -197,6 +199,7 @@ export const FrameworksArray = [
     {
         name: "Appery.io",
         web: "https://appery.io/",
+        image: "http://exadel.com/assets/ApperyIO/appery.io_logo_600x142.png",
         score: 0,
         performance: 0,
         apis: {
@@ -276,6 +279,7 @@ export const FrameworksArray = [
     {
         name: "Aquro",
         web: "http://www.aquro.com/",
+        image: "https://p3.zdassets.com/hc/settings_assets/888596/200136495/ABxUb2iBNfC44zD791SifA-top_logo.png",
         score: 0,
         performance: 0,
         apis: {
@@ -355,6 +359,7 @@ export const FrameworksArray = [
     {
         name: "Codename One",
         web: "https://www.codenameone.com/",
+        image: "https://res.cloudinary.com/crunchbase-production/image/upload/v1397185054/3d6c475b1666918e17f4348756162dbd.png",
         score: 0,
         performance: 2,
         apis: {
@@ -434,6 +439,7 @@ export const FrameworksArray = [
     {
         name: "Corona Labs",
         web: "https://coronalabs.com/",
+        image: "https://coronalabs.com/wp-content/uploads/2013/10/Flat_Corona_250x250.png",
         score: 0,
         performance: 1,
         apis: {
@@ -513,6 +519,7 @@ export const FrameworksArray = [
     {
         name: "Embarcadero",
         web: "https://www.embarcadero.com/",
+        image: "http://www.openco.it/wp-content/uploads/2015/03/Embarcadero.jpg",
         score: 0,
         performance: 2,
         apis: {
@@ -592,6 +599,7 @@ export const FrameworksArray = [
     {
         name: "Instant Developer",
         web: "http://www.instantdeveloper.com/",
+        image: "http://www.instantdeveloper.com/assets/logo-8e71db7111402e079a7f653c06362f53.png",
         score: 0,
         performance: 0,
         apis: {
@@ -671,6 +679,7 @@ export const FrameworksArray = [
     {
         name: "Ionic",
         web: "http://ionicframework.com/",
+        image: "http://ecodile.com/wp-content/uploads/2015/10/ionic.png",
         score: 0,
         performance: 1,
         apis: {
@@ -750,6 +759,7 @@ export const FrameworksArray = [
     {
         name: "Kivy",
         web: "https://kivy.org/#home",
+        image: "https://kivy.org/logos/kivy-logo-black-256.png",
         score: 0,
         performance: 0,
         apis: {
@@ -829,6 +839,7 @@ export const FrameworksArray = [
     {
         name: "Kony",
         web: "http://www.kony.com/",
+        image: "https://res.cloudinary.com/crunchbase-production/image/upload/v1446047799/fiw2eossbkplsfyy3to1.png",
         score: 0,
         performance: 1,
         apis: {
@@ -908,6 +919,7 @@ export const FrameworksArray = [
     {
         name: "NativeScript",
         web: "https://www.nativescript.org/",
+        image: "http://docs.nativescript.org/img/cli-getting-started/angular/chapter0/NativeScript_logo.png",
         score: 0,
         performance: 1,
         apis: {
@@ -987,6 +999,7 @@ export const FrameworksArray = [
     {
         name: "NeoMAD",
         web: "http://neomades.com/",
+        image: "http://entreprendre.estia.fr/wp-content/uploads/2015/04/NEOMADES-374x210.jpg",
         score: 0,
         performance: 1,
         apis: {
@@ -1066,6 +1079,7 @@ export const FrameworksArray = [
     {
         name: "NS Basic",
         web: "https://www.nsbasic.com/",
+        image: "https://avatars1.githubusercontent.com/u/489708?v=3&s=460",
         score: 0,
         performance: 0,
         apis: {
@@ -1145,6 +1159,7 @@ export const FrameworksArray = [
     {
         name: "PhoneGap",
         web: "http://phonegap.com/",
+        image: "http://phonegap.com/uploads/artwork/PhoneGap-Symbol-Black.png",
         score: 0,
         performance: 0,
         apis: {
@@ -1224,6 +1239,7 @@ export const FrameworksArray = [
     {
         name: "Qt",
         web: "https://www.qt.io/",
+        image: "https://upload.wikimedia.org/wikipedia/commons/d/d3/Qt_logo_2015.svg",
         score: 0,
         performance: 2,
         apis: {
@@ -1303,6 +1319,7 @@ export const FrameworksArray = [
     {
         name: "React Native",
         web: "https://facebook.github.io/react-native/",
+        image: "http://angular.github.io/react-native-renderer/assets/react.png",
         score: 0,
         performance: 1,
         apis: {
@@ -1382,6 +1399,7 @@ export const FrameworksArray = [
     {
         name: "RubyMotion",
         web: "http://www.rubymotion.com/",
+        image: "http://i.imgur.com/mndCd.png",
         score: 0,
         performance: 2,
         apis: {
@@ -1461,6 +1479,7 @@ export const FrameworksArray = [
     {
         name: "Smartface",
         web: "https://www.smartface.io/smartface/",
+        image: "https://res.cloudinary.com/crunchbase-production/image/upload/v1455916714/sxfpyihrzrdu7qy91dqi.png",
         score: 0,
         performance: 0,
         apis: {
@@ -1540,6 +1559,7 @@ export const FrameworksArray = [
     {
         name: "Tabris.js",
         web: "https://tabrisjs.com/",
+        image: "https://pbs.twimg.com/profile_images/556123940108505089/EgPXHGIi.png",
         score: 0,
         performance: 1,
         apis: {
@@ -1619,6 +1639,7 @@ export const FrameworksArray = [
     {
         name: "Telerik Platform",
         web: "http://www.telerik.com/platform",
+        image: "https://lh4.googleusercontent.com/-GRy7Ku-E_bM/UufXbdajfaI/AAAAAAAAAk4/4iOjrxMuiVc/profile.png",
         score: 0,
         performance: 0,
         apis: {
@@ -1698,6 +1719,7 @@ export const FrameworksArray = [
     {
         name: "ViziApps",
         web: "http://www.viziapps.com/",
+        image: "https://marketplace.thingworx.com/-/media/Marketplace/Partner/ViziApps%20logo.png?h=121&la=en&w=400&hash=EB9CF2A869BB82FF71F5167003C1475575C931BB",
         score: 0,
         performance: 0,
         apis: {
@@ -1777,6 +1799,7 @@ export const FrameworksArray = [
     {
         name: "Xamarin",
         web: "https://www.xamarin.com/",
+        image: "https://www.xamarin.com/content/images/pages/branding/assets/xamagon.png",
         score: 0,
         performance: 2,
         apis: {

@@ -15,6 +15,10 @@ class S3 extends Component {
         };
     }
 
+    componentDidMount () {
+        window.scrollTo(0, 0)
+    }
+
     getSuitableFrameworks() {
         return this.props.filteredFrameworks.filter(f =>
             (!this.state.background || isNullOrTrue(f.backgrounding[0])) &&

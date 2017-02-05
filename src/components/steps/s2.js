@@ -24,6 +24,10 @@ class S2 extends Component {
         //console.log('S2 ctor', props.filteredFrameworks);
     }
 
+    componentDidMount () {
+        window.scrollTo(0, 0)
+    }
+
     getSuitableFrameworks() {
         return this.props.filteredFrameworks.filter(f =>
             (this.state.nativeLook ? isNullOrTrue(f.ui.nativeLook[0]) : !isNullOrTrue(f.ui.nativeLook[0])) &&

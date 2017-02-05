@@ -3,8 +3,12 @@ import {connect} from 'react-redux';
 import {nextStep} from '../../actions/index';
 
 class S0 extends Component {
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
+
     render() {
-        return(
+        return (
             <div>
                 <div className="col-md-8">
                     <h1>Welcome!</h1>
@@ -28,10 +32,8 @@ class S0 extends Component {
                                 <div id="eliminating-questions" className="collapse">
                                     <p>
                                         Before proceeding with the methodology itself, several eliminating questions
-                                        should
-                                        be answered. If the answer is “yes” to one or multiple questions this
-                                        methodology 7
-                                        may not be useful.
+                                        should be answered. If the answer is “yes” to one or multiple questions this
+                                        methodology may not be useful.
                                     </p>
 
                                     <ul>
@@ -40,12 +42,10 @@ class S0 extends Component {
                                                 targeted?</strong>
                                             <small>
                                                 If the answer is “yes”, then there is no doubt. Go native. There is
-                                                nothing
-                                                that beats native development. The world of multi-platform tools is a
-                                                world
-                                                of compromises. Native development allows you to use the operating
-                                                system to
-                                                its fullest potential, while not limiting the performance.
+                                                nothing that beats native development. The world of multi-platform tools
+                                                is a world of compromises. Native development allows you to use the
+                                                operating system to its fullest potential, while not limiting the
+                                                performance.
                                             </small>
                                         </li>
                                         <li>
@@ -237,4 +237,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { nextStep: nextStep })(S0);
+export default connect(mapStateToProps, {nextStep: nextStep})(S0);
