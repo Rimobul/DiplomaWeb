@@ -13,32 +13,28 @@
     display: block;
 }
 
-.question  {
-    margin-bottom: 20px;
-}
-
 .question > div {
     padding-left: 0;
     padding-right: 0;
 }
 
 .question .question-title {
-    padding: 5px;
-    border: solid 1px #F48FB1;
-    background-color: #FCE4EC;
+    padding: 20px;
+    font-weight: bold;
+    background-color: #ECECEC;
 }
 
 .question .answers {
-    padding: 5px;
-    border: solid 1px #FFC107;
-    background-color: #FFF8E1;
+    padding: 20px;
+    border: solid 1px #ECECEC;
+    border-top: 0;
 }
 
 .question .note {
-    padding: 5px;
-    border: solid 1px #FF5722;
-    background-color: #FFCCBC;
+    padding: 20px;
+    background-color: #F9F9F9;
     min-height: 75px;
+    margin-bottom: 50px;
 }
 
 .thumbnail .box-logo {

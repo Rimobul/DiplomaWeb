@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {nextStep, filterFrameworks} from '../../actions/index';
 import {isNullOrTrue} from './utils';
+import Question from '../question';
 
 class S3 extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class S3 extends Component {
         };
     }
 
-    componentDidMount () {
+    componentDidMount() {
         window.scrollTo(0, 0)
     }
 
@@ -36,26 +37,9 @@ class S3 extends Component {
             <div>
                 {filteredFrameworks.length} frameworks satisfy your requirements.
 
-                <div className="question">
-                    <div className="col-md-8">
-                        <div className="question-title">
-                            Do you want to use a background process?
-                        </div>
-                        <div className="answers col-md-10 col-md-offset-2">
-                            <input type="radio"
-                                   name="background"
-                                   value="Yes"
-                                   checked={this.state.background}
-                                   onChange={() => this.setState({background: true})}/>Yes<br />
-                            <input type="radio"
-                                   name="background"
-                                   value="No"
-                                   checked={!this.state.background}
-                                   onChange={() => this.setState({background: false})}/>No<br />
-                        </div>
-                    </div>
-                    <div className="note col-md-4">
-                        Some applications might find it useful to have a permanent background service with no interface.
+                <Question
+                    question="Do you want to use a background process?"
+                    note="Some applications might find it useful to have a permanent background service with no interface.
                         This could be applied for several use cases, like tracking the position, updating stock markets
                         data, notifying user of an emergency situation. You should take into consideration, that iOS has
                         very limited support for background processes, allowing only geolocation updates. All other
@@ -65,34 +49,25 @@ class S3 extends Component {
                         cases, you should keep in mind that background processes on any platform are considered low
                         priority. Therefore they are the first victims when the underlying OS needs to kill running apps
                         and get more resources.
-                        <br/>
                         Because of these obstacles, only a handful of tools provide a way to create background services
                         (Codename One, Embarcadero, NeoMAD, Qt, Xamarin). Although there exist 3rd party libraries for
                         all tools based on Apache Cordova, their functionality is limited and inconsistent across
-                        individual operating systems.
-                    </div>
-                </div>
+                        individual operating systems.">
+                    <input type="radio"
+                           name="background"
+                           value="Yes"
+                           checked={this.state.background}
+                           onChange={() => this.setState({background: true})}/>Yes<br />
+                    <input type="radio"
+                           name="background"
+                           value="No"
+                           checked={!this.state.background}
+                           onChange={() => this.setState({background: false})}/>No<br />
+                </Question>
 
-                <div className="question">
-                    <div className="col-md-8">
-                        <div className="question-title">
-                            Do you want to use PUSH notifications?
-                        </div>
-                        <div className="answers col-md-10 col-md-offset-2">
-                            <input type="radio"
-                                   name="push"
-                                   value="Yes"
-                                   checked={this.state.push}
-                                   onChange={() => this.setState({push: true})}/>Yes<br />
-                            <input type="radio"
-                                   name="push"
-                                   value="No"
-                                   checked={!this.state.push}
-                                   onChange={() => this.setState({push: false})}/>No<br />
-                        </div>
-                    </div>
-                    <div className="note col-md-4">
-                        Unlike local notifications, which are both sent and received by the application itself, push
+                <Question
+                    question="Do you want to use PUSH notifications?"
+                    note="Unlike local notifications, which are both sent and received by the application itself, push
                         notifications are one of the few ways how a remote server can alert your application without
                         prior request. They are important on Android and Windows, since there are still limited ways for
                         push-model communication. However, they are absolutely essential on iOS, because it is the only
@@ -102,70 +77,62 @@ class S3 extends Component {
                         notifications on Windows as well. However, iOS are very limited, offer almost no interactivity
                         and - in case the application is in background - push notifications are handled by the operating
                         system itself, rather than the hosting application.
-                        <br/>
                         Push notifications are well established in tools providing MBaaS services, as it is one of their
                         core functionalities. Yet, they are such an essential feature nowadays, almost all
                         multi-platform development tools implement them (with Kivy and Qt supporting only Android and
-                        Windows notifications).
-                    </div>
-                </div>
+                        Windows notifications).">
+                    <input type="radio"
+                           name="push"
+                           value="Yes"
+                           checked={this.state.push}
+                           onChange={() => this.setState({push: true})}/>Yes<br />
+                    <input type="radio"
+                           name="push"
+                           value="No"
+                           checked={!this.state.push}
+                           onChange={() => this.setState({push: false})}/>No<br />
+                </Question>
 
-                <div className="question">
-                    <div className="col-md-8">
-                        <div className="question-title">
-                            Do you need to create custom plugins or invoke native libraries?
-                        </div>
-                        <div className="answers col-md-10 col-md-offset-2">
-                            <input type="radio"
-                                   name="invokeNative"
-                                   value="Yes"
-                                   checked={this.state.invokeNative}
-                                   onChange={() => this.setState({invokeNative: true})}/>Yes<br />
-                            <input type="radio"
-                                   name="invokeNative"
-                                   value="No"
-                                   checked={!this.state.invokeNative}
-                                   onChange={() => this.setState({invokeNative: false})}/>No<br />
-                        </div>
-                    </div>
-                    <div className="note col-md-4">
-                        Even with the richest environment of 3rd party plugins, there can still be a custom library or
+                <Question
+                    question="Do you need to create custom plugins or invoke native libraries?"
+                    note="Even with the richest environment of 3rd party plugins, there can still be a custom library or
                         UI element that is only available as a native C#/Java/ObjectiveC/Swift package. You may also
                         want to target a specific device, which has non-standard API, such as ambient lights. To do so,
                         you need to interact with the native package either through a wrapper, or directly. Most tools
                         provide one way or another to achieve this capability. But code-free tools, like Instant
-                        Developer, SmartFace or ViziApps have limited to no support for such behaviour.
-                    </div>
-                </div>
+                        Developer, SmartFace or ViziApps have limited to no support for such behaviour.">
+                    <input type="radio"
+                           name="invokeNative"
+                           value="Yes"
+                           checked={this.state.invokeNative}
+                           onChange={() => this.setState({invokeNative: true})}/>Yes<br />
+                    <input type="radio"
+                           name="invokeNative"
+                           value="No"
+                           checked={!this.state.invokeNative}
+                           onChange={() => this.setState({invokeNative: false})}/>No<br />
+                </Question>
 
-                <div className="question">
-                    <div className="col-md-8">
-                        <div className="question-title">
-                            Is app monitoring and crash analytics required by the project?
-                        </div>
-                        <div className="answers col-md-10 col-md-offset-2">
-                            <input type="radio"
-                                   name="crash"
-                                   value="Yes"
-                                   checked={this.state.crash}
-                                   onChange={() => this.setState({crash: true})}/>Yes<br />
-                            <input type="radio"
-                                   name="crash"
-                                   value="No"
-                                   checked={!this.state.crash}
-                                   onChange={() => this.setState({crash: false})}/>No<br />
-                        </div>
-                    </div>
-                    <div className="note col-md-4">
-                        Even when the app is out, the work is not done. Monitoring usage, performance and application
+                <Question
+                    question="Is app monitoring and crash analytics required by the project?"
+                    note="Even when the app is out, the work is not done. Monitoring usage, performance and application
                         crashes is vital for providing continual support and improvement. While there are some free
                         libraries and tools like ACRA, Crashlytics or Xcode Crash Reports, they may not be compatible
                         with your chosen development tool. You should closely examine, whether integration of the
                         multi-platform development tool and analytics framework is possible. If not, try to find out,
                         whether an alternative is provided by the tool (e.g. Telerik Analytics for NativeScript or
-                        HockeyApp for Xamarin).
-                    </div>
-                </div>
+                        HockeyApp for Xamarin).">
+                    <input type="radio"
+                           name="crash"
+                           value="Yes"
+                           checked={this.state.crash}
+                           onChange={() => this.setState({crash: true})}/>Yes<br />
+                    <input type="radio"
+                           name="crash"
+                           value="No"
+                           checked={!this.state.crash}
+                           onChange={() => this.setState({crash: false})}/>No<br />
+                </Question>
 
                 <div>
                     <button
