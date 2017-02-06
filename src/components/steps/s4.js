@@ -96,7 +96,6 @@ class S4 extends Component {
                     <button
                         className="btn btn-success"
                         onClick={() => {
-                            this.props.filterFrameworks(this.props.filteredFrameworks);
                             this.props.nextStep(this.props.currentStep)
                         }}>
                         Refine more
@@ -110,7 +109,6 @@ class S4 extends Component {
 
 function mapStateToProps(state) {
     return {
-        allFrameworks: state.allFrameworks,
         filteredFrameworks: state.filteredFrameworks,
         currentStep: state.currentStep
     }

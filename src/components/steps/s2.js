@@ -43,7 +43,7 @@ class S2 extends Component {
             (!this.state.gps || isNullOrTrue(f.sensors.geolocation[0])) &&
             (!this.state.accelerometer || isNullOrTrue(f.sensors.accelerometer[0])) &&
             (!this.state.gyro || isNullOrTrue(f.sensors.gyroscope[0])) &&
-            (!this.state.deviceState || isNullOrTrue(f.apis.deviceState[0]))
+            (!this.state.deviceState || isNullOrTrue(f.apis.deviceStatus[0]))
         );
     }
 
