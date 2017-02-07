@@ -25,6 +25,10 @@ class S6 extends Component {
         }
     }
 
+    componentDidMount () {
+        window.scrollTo(0, 0)
+    }
+
     getScoreArray(){
         const scoreArray = this.props.scoredFrameworks.map(f => {
             let points = 0;

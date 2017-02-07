@@ -75,8 +75,6 @@ class S4 extends Component {
     }
 
     render(){
-        console.log(this.props.filteredFrameworks);
-
         return (
             <div>
                 <div className="row">

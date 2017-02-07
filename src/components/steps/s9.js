@@ -4,7 +4,7 @@ import {nextStep, addScore} from '../../actions/index';
 import {evaluatePoints} from './utils';
 import Question from '../question';
 
-class S7 extends Component {
+class S9 extends Component {
     constructor(props) {
         super(props);
 
@@ -137,4 +137,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { nextStep: nextStep, addScore: addScore })(S7);
+export default connect(mapStateToProps, { nextStep: nextStep, addScore: addScore })(S9);
