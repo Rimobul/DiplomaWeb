@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, filterFrameworks} from '../../actions/index';
-import {isNullOrTrue} from './utils';
+import {nextStep, addScore} from '../../actions/index';
+import {isNullOrTrue, evaluatePoints} from './utils';
 import Question from '../question';
 
 class S3 extends Component {
@@ -20,8 +20,29 @@ class S3 extends Component {
         window.scrollTo(0, 0)
     }
 
+    getScoreArray(frameworks){
+        const scoreArray = frameworks.map(f => {
+            let points = 0;
+            if(this.state.background){
+                points += evaluatePoints(f.backgrounding[0], 7);
+            }
+            if(this.state.push){
+                points += evaluatePoints(f.apis.pushNotifications[0], 7);
+            }
+            if(this.state.invokeNative){
+                points += evaluatePoints(f.invokeNative[0], 7);
+            }
+            if(this.state.crash){
+                points += evaluatePoints(f.testing.appMonitoring[0], 7);
+            }
+            return {name: f.name, points: points};
+        });
+
+        return scoreArray;
+    }
+
     getSuitableFrameworks() {
-        return this.props.filteredFrameworks.filter(f =>
+        return this.props.scoredFrameworks.filter(f =>
             (!this.state.background || isNullOrTrue(f.backgrounding[0])) &&
             (!this.state.push || isNullOrTrue(f.apis.pushNotifications[0])) &&
             (!this.state.invokeNative || isNullOrTrue(f.invokeNative[0])) &&
@@ -138,7 +159,8 @@ class S3 extends Component {
                     <button
                         className="btn btn-success"
                         onClick={() => {
-                            this.props.filterFrameworks(this.getSuitableFrameworks());
+                            const filteredFrameworks = this.getSuitableFrameworks();
+                            this.props.addScore(filteredFrameworks, this.getScoreArray(filteredFrameworks));
                             this.props.nextStep(this.props.currentStep)
                         }}>
                         Continue
@@ -152,10 +174,9 @@ class S3 extends Component {
 
 function mapStateToProps(state) {
     return {
-        allFrameworks: state.allFrameworks,
-        filteredFrameworks: state.filteredFrameworks,
+        scoredFrameworks: state.scoredFrameworks,
         currentStep: state.currentStep
     }
 }
 
-export default connect(mapStateToProps, {nextStep: nextStep, filterFrameworks: filterFrameworks})(S3);
+export default connect(mapStateToProps, {nextStep: nextStep, addScore: addScore})(S3);

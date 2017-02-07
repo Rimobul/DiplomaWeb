@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, filterFrameworks, resetSteps} from '../../actions/index';
+import {nextStep, resetSteps} from '../../actions/index';
 
 class S4 extends Component {
     componentDidMount () {
@@ -52,6 +52,8 @@ class S4 extends Component {
                     </a>
                     <div className="caption">
                         <h2>{framework.name}</h2>
+                        <br/>
+                        <h3>Score: {framework.score}</h3>
                     </div>
                     <table className="table table-striped">
                         <thead>
@@ -78,7 +80,7 @@ class S4 extends Component {
         return (
             <div>
                 <div className="row">
-                    {this.props.filteredFrameworks.map(framework => this.renderFramework(framework))}
+                    {this.props.scoredFrameworks.map(framework => this.renderFramework(framework))}
                 </div>
 
                 <div>
@@ -107,12 +109,11 @@ class S4 extends Component {
 
 function mapStateToProps(state) {
     return {
-        filteredFrameworks: state.filteredFrameworks,
+        scoredFrameworks: state.scoredFrameworks,
         currentStep: state.currentStep
     }
 }
 
 export default connect(mapStateToProps, {
     nextStep: nextStep,
-    filterFrameworks: filterFrameworks,
     resetSteps: resetSteps})(S4);

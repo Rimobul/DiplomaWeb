@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, filterFrameworks} from '../../actions/index';
-import {isNullOrTrue} from './utils';
+import {nextStep, addScore} from '../../actions/index';
+import {isNullOrTrue, evaluatePoints} from './utils';
 import Question from '../question';
 
 class S2 extends Component {
@@ -29,8 +29,45 @@ class S2 extends Component {
         window.scrollTo(0, 0)
     }
 
+    getScoreArray(frameworks){
+        const scoreArray = frameworks.map(f => {
+            let points = 0;
+            if(this.state.multithreading){
+                points += evaluatePoints(f.multithreading[0], 7);
+            }
+            if(this.state.camera){
+                points += evaluatePoints(f.sensors.camera[0], 7);
+            }
+            if(this.state.microphone){
+                points += evaluatePoints(f.sensors.microphone[0], 7);
+            }
+            if(this.state.video){
+                points += evaluatePoints(f.apis.video[0], 7);
+            }
+            if(this.state.audio){
+                points += evaluatePoints(f.apis.audio[0], 7);
+            }
+            if(this.state.gps){
+                points += evaluatePoints(f.sensors.geolocation[0], 7);
+            }
+            if(this.state.accelerometer){
+                points += evaluatePoints(f.sensors.accelerometer[0], 7);
+            }
+            if(this.state.gyro){
+                points += evaluatePoints(f.sensors.gyroscope[0], 7);
+            }
+            if(this.state.deviceState){
+                points += evaluatePoints(f.apis.deviceStatus[0], 7);
+            }
+
+            return {name: f.name, points: points};
+        });
+
+        return scoreArray;
+    }
+
     getSuitableFrameworks() {
-        return this.props.filteredFrameworks.filter(f =>
+        return this.props.scoredFrameworks.filter(f =>
             (this.state.nativeLook ? isNullOrTrue(f.ui.nativeLook[0]) : !isNullOrTrue(f.ui.nativeLook[0])) &&
             (this.state.singleUi ?
                 f.ui.uiLayers.some(ui => ui === "Single") :
@@ -204,7 +241,8 @@ class S2 extends Component {
                     <button
                         className="btn btn-success"
                         onClick={() => {
-                            this.props.filterFrameworks(this.getSuitableFrameworks());
+                            const filteredFrameworks = this.getSuitableFrameworks();
+                            this.props.addScore(filteredFrameworks, this.getScoreArray(filteredFrameworks));
                             this.props.nextStep(this.props.currentStep)
                         }}>
                         Continue
@@ -218,10 +256,9 @@ class S2 extends Component {
 
 function mapStateToProps(state) {
     return {
-        allFrameworks: state.allFrameworks,
-        filteredFrameworks: state.filteredFrameworks,
+        scoredFrameworks: state.scoredFrameworks,
         currentStep: state.currentStep
     }
 }
 
-export default connect(mapStateToProps, {nextStep: nextStep, filterFrameworks: filterFrameworks})(S2);
+export default connect(mapStateToProps, {nextStep: nextStep, addScore: addScore})(S2);

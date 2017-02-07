@@ -1,5 +1,5 @@
 export const CURRENT_STEP = 'CURRENT_STEP';
-export const FILTER_FRAMEWORKS = 'FILTER_FRAMEWORKS';
+//export const FILTER_FRAMEWORKS = 'FILTER_FRAMEWORKS';
 export const SCORED_FRAMEWORKS = 'SCORED_FRAMEWORKS';
 
 export function nextStep(currentStep) {
@@ -16,12 +16,12 @@ export function resetSteps() {
     };
 }
 
-export function filterFrameworks(filteredArray) {
-    return {
-        type: FILTER_FRAMEWORKS,
-        payload: filteredArray
-    }
-}
+// export function filterFrameworks(filteredArray) {
+//     return {
+//         type: FILTER_FRAMEWORKS,
+//         payload: filteredArray
+//     }
+// }
 
 export function addScore(frameworks, score) {
     console.log("Adding score", frameworks, score);

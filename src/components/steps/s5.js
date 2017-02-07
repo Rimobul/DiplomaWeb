@@ -20,7 +20,7 @@ class S5 extends Component {
     }
 
     getScoreArray(){
-        const scoreArray = this.props.filteredFrameworks.map(f => {
+        const scoreArray = this.props.scoredFrameworks.map(f => {
             let points = 0;
             if(this.state.designer){
                 points += evaluatePoints(f.ui.designer[0], 5);
@@ -102,7 +102,7 @@ class S5 extends Component {
                     <button
                         className="btn btn-success"
                         onClick={() => {
-                            this.props.addScore(this.props.filteredFrameworks, this.getScoreArray());
+                            this.props.addScore(this.props.scoredFrameworks, this.getScoreArray());
                             this.props.nextStep(this.props.currentStep)
                         }}>
                         Continue
@@ -116,7 +116,7 @@ class S5 extends Component {
 
 function mapStateToProps(state) {
     return {
-        filteredFrameworks: state.filteredFrameworks,
+        scoredFrameworks: state.scoredFrameworks,
         currentStep: state.currentStep
     }
 }

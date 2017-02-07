@@ -6,7 +6,7 @@ import ScoredFrameworksReducer from './scored-frameworks-reducer';
 
 const rootReducer = combineReducers({
     allFrameworks: AvailableFrameworksReducer,
-    filteredFrameworks: FilteredFrameworksReducer,
+    //filteredFrameworks: FilteredFrameworksReducer,
     currentStep: CurrentStepReducer,
     scoredFrameworks: ScoredFrameworksReducer
 });
