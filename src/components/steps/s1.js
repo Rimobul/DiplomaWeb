@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {isNullOrTrue} from './utils';
+import {isNullOrTrue, evaluatePoints} from './utils';
 import {connect} from 'react-redux';
-import {nextStep, filterFrameworks} from '../../actions/index';
+import {nextStep, addScore} from '../../actions/index';
 import Question from '../question';
 
 class S1 extends Component {
@@ -26,6 +26,45 @@ class S1 extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0)
+    }
+
+    getScoreArray(frameworks){
+        const scoreArray = frameworks.map(f => {
+            let points = 0;
+            if(this.state.android){
+                points += evaluatePoints(f.mobileOs.android[0], 7);
+            }
+            if(this.state.ios){
+                points += evaluatePoints(f.mobileOs.ios[0], 7);
+            }
+            if(this.state.windowsPhone){
+                points += evaluatePoints(f.mobileOs.windows[0], 7);
+            }
+            if(this.state.blackBerry){
+                points += evaluatePoints(f.mobileOs.blackBerry[0], 7);
+            }
+            if(this.state.linux){
+                points += evaluatePoints(f.desktopOs.linux[0], 7);
+            }
+            if(this.state.macOs){
+                points += evaluatePoints(f.desktopOs.macOs[0], 7);
+            }
+            if(this.state.windows){
+                points += evaluatePoints(f.desktopOs.windows[0], 7);
+            }
+            if(this.state.web){
+                points += evaluatePoints(f.desktopOs.web[0], 7);
+            }
+            if(this.state.iOSnonMac){
+                points += evaluatePoints(f.desktopOs.iOSnonMac[0], 7);
+            }
+            if(this.state.winNonWin){
+                points += evaluatePoints(f.desktopOs.winNonWin[0], 7);
+            }
+            return {name: f.name, points: points};
+        });
+
+        return scoreArray;
     }
 
     satisfiesPriceLimit(framework, teamSize, priceLimit) {
@@ -248,7 +287,8 @@ class S1 extends Component {
                     <button
                         className="btn btn-success"
                         onClick={() => {
-                            this.props.filterFrameworks(this.getSuitableFrameworks());
+                            const filteredFrameworks = this.getSuitableFrameworks();
+                            this.props.addScore(filteredFrameworks, this.getScoreArray(filteredFrameworks))
                             this.props.nextStep(this.props.currentStep)
                         }}>
                         Continue
@@ -267,4 +307,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {nextStep: nextStep, filterFrameworks: filterFrameworks})(S1);
+export default connect(mapStateToProps, { nextStep: nextStep, addScore: addScore })(S1);
