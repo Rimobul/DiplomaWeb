@@ -30,13 +30,10 @@ class S5 extends Component {
             return {name: f.name, points: points};
         });
 
-        console.log('Score array', scoreArray);
         return scoreArray;
     }
 
     render() {
-        console.log(this.props.filteredFrameworks);
-
         return (
             <div>
                 <Question
