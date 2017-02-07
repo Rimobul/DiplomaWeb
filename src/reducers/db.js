@@ -76,7 +76,7 @@ export const FrameworksArray = [
             windows: [false]
         },
         mbaas: [true],
-        multithreading: [false],
+        multithreading: [null, "Partially available with script thread processes."],
         openGl: [false],
         osOverrides: [false],
         prices: {
@@ -956,7 +956,7 @@ export const FrameworksArray = [
             windows: [null, "Planned"]
         },
         mbaas: [false, custom3],
-        multithreading: [false],
+        multithreading: [null, webWorkers],
         openGl: [null, webGl],
         osOverrides: [true],
         prices: {
@@ -1108,7 +1108,7 @@ export const FrameworksArray = [
         },
         games: [true, "MonoGame and CocosSharp"],
         invokeNative: [false],
-        languages: [csharp],
+        languages: [basic, js],
         mobileOs: {
             android: [true],
             blackBerry: [false],
@@ -1116,7 +1116,7 @@ export const FrameworksArray = [
             windows: [null, "Only as mobile web app."]
         },
         mbaas: [false, custom3],
-        multithreading: [basic, js],
+        multithreading: [false],
         openGl: [null, webGl],
         osOverrides: [true],
         prices: {
@@ -1196,7 +1196,7 @@ export const FrameworksArray = [
             windows: [true]
         },
         mbaas: [false, custom3],
-        multithreading: [false],
+        multithreading: [null, webWorkers],
         openGl: [null, webGl],
         osOverrides: [true],
         prices: {
@@ -1356,7 +1356,7 @@ export const FrameworksArray = [
             windows: [null, "Planned."]
         },
         mbaas: [false, custom3],
-        multithreading: [null, "Partially available via web workers can be used."],
+        multithreading: [null, webWorkers],
         openGl: [null, webGl],
         osOverrides: [true],
         prices: {
@@ -1596,7 +1596,7 @@ export const FrameworksArray = [
             windows: [true]
         },
         mbaas: [false, custom3],
-        multithreading: [false],
+        multithreading: [null, webWorkers],
         openGl: [null, webGl],
         osOverrides: [true],
         prices: {

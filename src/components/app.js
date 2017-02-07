@@ -8,6 +8,7 @@ import S4 from './steps/s4';
 import S5 from './steps/s5';
 import S6 from './steps/s6';
 import S7 from './steps/s7';
+import S8 from './steps/s8';
 
 class App extends Component {
     render() {
@@ -28,6 +29,8 @@ class App extends Component {
                 return <S6 />;
             case 7:
                 return <S7 />;
+            case 8:
+                return <S8 />;
         };
     }
 }

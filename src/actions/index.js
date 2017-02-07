@@ -24,6 +24,8 @@ export function filterFrameworks(filteredArray) {
 }
 
 export function addScore(frameworks, score) {
+    console.log("Adding score", frameworks, score);
+
     return {
         type: SCORED_FRAMEWORKS,
         payload: { frameworks: frameworks, score: score}

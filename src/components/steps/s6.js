@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {nextStep, addScore} from '../../actions/index';
 import Question from '../question';
+import {evaluatePoints} from './utils';
 
 class S6 extends Component {
     constructor(props) {
@@ -175,7 +176,7 @@ class S6 extends Component {
                     <button
                         className="btn btn-success"
                         onClick={() => {
-                            this.props.addScore(this.props.filteredFrameworks, this.getScoreArray());
+                            this.props.addScore(this.props.scoredFrameworks, this.getScoreArray());
                             this.props.nextStep(this.props.currentStep)
                         }}>
                         Continue
