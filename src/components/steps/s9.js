@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {nextStep, addScore} from '../../actions/index';
-import {evaluatePoints} from './utils';
+import {evaluatePoints, isNullOrTrue} from './utils';
 import Question from '../question';
 
 class S9 extends Component {
@@ -9,10 +9,21 @@ class S9 extends Component {
         super(props);
 
         this.state = {
-            debug: false,
-            unit: false,
-            uiTesting: false,
-            profiling: false
+            angular: false,
+            basic: false,
+            cpp: false,
+            csharp: false,
+            delphi: false,
+            js: false,
+            java: false,
+            lua: false,
+            python: false,
+            react: false,
+            ruby: false,
+            codefree: false,
+            mbaas: false,
+            browser: false,
+            call: false
         }
     }
 
@@ -23,17 +34,50 @@ class S9 extends Component {
     getScoreArray(){
         const scoreArray = this.props.scoredFrameworks.map(f => {
             let points = 0;
-            if(this.state.debug){
-                points += evaluatePoints(f.testing.debugging[0], 5);
+            if(this.state.angular){
+                points += evaluatePoints(f.languages.some(l => l === "Angular"), 1);
             }
-            if(this.state.unit){
-                points += evaluatePoints(f.testing.unitTest[0], 5);
+            if(this.state.basic){
+                points += evaluatePoints(f.languages.some(l => l === "BASIC"), 1);
             }
-            if(this.state.uiTesting){
-                points += evaluatePoints(f.testing.uiTest[0], 5);
+            if(this.state.cpp){
+                points += evaluatePoints(f.languages.some(l => l === "C++"), 1);
             }
-            if(this.state.profiling){
-                points += evaluatePoints(f.testing.appProfiling[0], 5);
+            if(this.state.csharp){
+                points += evaluatePoints(f.languages.some(l => l === "C#"), 1);
+            }
+            if(this.state.delphi){
+                points += evaluatePoints(f.languages.some(l => l === "Delphi"), 1);
+            }
+            if(this.state.js){
+                points += evaluatePoints(f.languages.some(l => l === "JavaScript"), 1);
+            }
+            if(this.state.java){
+                points += evaluatePoints(f.languages.some(l => l === "Java"), 1);
+            }
+            if(this.state.lua){
+                points += evaluatePoints(f.languages.some(l => l === "Lua"), 1);
+            }
+            if(this.state.python){
+                points += evaluatePoints(f.languages.some(l => l === "Python"), 1);
+            }
+            if(this.state.react){
+                points += evaluatePoints(f.languages.some(l => l === "React"), 1);
+            }
+            if(this.state.ruby){
+                points += evaluatePoints(f.languages.some(l => l === "Ruby"), 1);
+            }
+            if(this.state.codefree){
+                points += evaluatePoints(f.languages.some(l => l === "Code-free"), 1);
+            }
+            if(this.state.mbaas){
+                points += evaluatePoints(f.mbaas[0], 1);
+            }
+            if(this.state.browser){
+                points += evaluatePoints(f.apis.embeddedBrowser[0], 1);
+            }
+            if(this.state.call){
+                points += evaluatePoints(isNullOrTrue(f.apis.addressBook[0]) && isNullOrTrue(f.apis.callSms[0]), 1);
             }
             return {name: f.name, points: points};
         });
@@ -45,73 +89,117 @@ class S9 extends Component {
         return(
             <div>
                 <Question
-                    question="Do you want to use debugging?"
-                    note="Debugging is one of the earliest tools that can help developers find and fix possible errors.
-                    It allows to closely examine every line of code. For any application that has medium to high
-                    complexity, debugging capability is a must.">
-                    <input type="radio"
-                           name="debug"
-                           value="Yes"
-                           checked={this.state.debug}
-                           onChange={() => this.setState({debug: true})}/>Yes<br />
-                    <input type="radio"
-                           name="debug"
-                           value="No"
-                           checked={!this.state.debug}
-                           onChange={() => this.setState({debug: false})}/>No<br />
+                    question="Do you have experience with any of the following programming languages?"
+                    note="Even if the developers have no previous experience with a multi-platform development tool,
+                    high skills in a particular programming language might help them to learn using it more quickly.
+
+                    Currently, the most wide-spread programming language for multi-platform development is JavaScript,
+                    or some of its derivatives (Angular, TypeScript). However, there exists at least one or two tools
+                    for each major programming language (BASIC, C++, C#, Delphi, Java, Lua, Python, Ruby). There are
+                    even a few tools which allow code-free visual app building.">
+                    <input type="checkbox"
+                           checked={this.state.angular}
+                           onClick={() => this.setState({angular: !this.state.angular})}/>
+                    AngularJS<br />
+                    <input type="checkbox"
+                           checked={this.state.basic}
+                           onClick={() => this.setState({basic: !this.state.basic})}/>
+                    BASIC<br/>
+                    <input type="checkbox"
+                           checked={this.state.cpp}
+                           onClick={() => this.setState({cpp: !this.state.cpp})}/>
+                    C++<br/>
+                    <input type="checkbox"
+                           checked={this.state.csharp}
+                           onClick={() => this.setState({csharp: !this.state.csharp})}/>
+                    C#<br />
+                    <input type="checkbox"
+                           checked={this.state.delphi}
+                           onClick={() => this.setState({delphi: !this.state.delphi})}/>
+                    Delphi<br />
+                    <input type="checkbox"
+                           checked={this.state.js}
+                           onClick={() => this.setState({js: !this.state.js})}/>
+                    JavaScript (or an alternative, like CoffeeScript or TypeScript)<br />
+                    <input type="checkbox"
+                           checked={this.state.java}
+                           onClick={() => this.setState({java: !this.state.java})}/>
+                    Java<br />
+                    <input type="checkbox"
+                           checked={this.state.lua}
+                           onClick={() => this.setState({lua: !this.state.lua})}/>
+                    Lua<br />
+                    <input type="checkbox"
+                           checked={this.state.python}
+                           onClick={() => this.setState({python: !this.state.python})}/>
+                    Python<br />
+                    <input type="checkbox"
+                           checked={this.state.react}
+                           onClick={() => this.setState({react: !this.state.react})}/>
+                    ReactJS<br />
+                    <input type="checkbox"
+                           checked={this.state.ruby}
+                           onClick={() => this.setState({ruby: !this.state.ruby})}/>
+                    Ruby<br />
+                    <input type="checkbox"
+                           checked={this.state.codefree}
+                           onClick={() => this.setState({codefree: !this.state.codefree})}/>
+                    I am looking for a code-free solution<br/>
                 </Question>
 
                 <Question
-                    question="Do you want to unit test the app?"
-                    note="Unit tests are the first tests done after (or sometimes before) a piece of code is written.
-                    While not examining the system as a whole, they test each method or class individually. This helps
-                    to increase the clarity and readability of code. Unit tests are then the first indicator whether
-                    new or refactored code is functional and satisfies all required standards.">
+                    question="Are MBaaS features or cloud connection necessary?"
+                    note="Many project rely on at least some basic cloud connectivity. Interaction with backend server
+                    or social networks is exactly what MBaaS providers offer. If the development tool does not feature
+                    an out-of-the-box MBaaS support, check the possibility of custom implementation. Especially
+                    code-free and JavaScript-based tools are prone to inability to add custom functionality.">
                     <input type="radio"
-                           name="unit"
+                           name="mbaas"
                            value="Yes"
-                           checked={this.state.unit}
-                           onChange={() => this.setState({unit: true})}/>Yes<br />
+                           checked={this.state.mbaas}
+                           onChange={() => this.setState({mbaas: true})}/>Yes<br />
                     <input type="radio"
-                           name="unit"
+                           name="mbaas"
                            value="No"
-                           checked={!this.state.unit}
-                           onChange={() => this.setState({unit: false})}/>No<br />
+                           checked={!this.state.mbaas}
+                           onChange={() => this.setState({mbaas: false})}/>No<br />
                 </Question>
 
                 <Question
-                    question="Do you require automated UI testing?"
-                    note="While new functionality is generally thoroughly tested manually, repeated tasks, such as
-                    smoke tests or regression tests, can be automated. Automated UI tests substantially increase the
-                    volume of tests performed for complex business- and enterprise-ready applications. They can be also
-                    incorporated into the continuous integration process.">
+                    question="Do you need an embedded web browser?"
+                    note="Using an embedded web browser is one of the less common functionalities. Its use is very
+                    peculiar in case of the hybrid apps, since they themselves are ran from within a web browser -
+                    therefore, it is a browser inside a browser. Yet, with the exception of Instant Developer and
+                    Smartface, all tools support this functionality. Ionic, Kivy and NeoMAD require custom
+                    implementation and PhoneGap does not feature web browser for BlackBerry.">
                     <input type="radio"
-                           name="uiTesting"
+                           name="browser"
                            value="Yes"
-                           checked={this.state.uiTesting}
-                           onChange={() => this.setState({uiTesting: true})}/>Yes<br />
+                           checked={this.state.browser}
+                           onChange={() => this.setState({browser: true})}/>Yes<br />
                     <input type="radio"
-                           name="uiTesting"
+                           name="browser"
                            value="No"
-                           checked={!this.state.uiTesting}
-                           onChange={() => this.setState({uiTesting: false})}/>No<br />
+                           checked={!this.state.browser}
+                           onChange={() => this.setState({browser: false})}/>No<br />
                 </Question>
 
                 <Question
-                    question="Is app profiling necessary for the project?"
-                    note="Neither unit tests, nor manual tests are able to discover low-level or long-running issues,
-                    like memory leaks or taking up too much resources. If high quality and high performance are
-                    important for your project, you should definitely use a tool or IDE that provides app profiling.">
+                    question="Do you want to access the address book and be able to make a call, or send SMS?"
+                    note="While contemporary smartphones are often more smart than phones, accessing the contacts list,
+                    making calls or texting is still used, from time to time. It is therefore a bit of relief that all
+                    examined development tools support this functionality, although some may require a 3rd party
+                    library.">
                     <input type="radio"
-                           name="profiling"
+                           name="call"
                            value="Yes"
-                           checked={this.state.profiling}
-                           onChange={() => this.setState({profiling: true})}/>Yes<br />
+                           checked={this.state.call}
+                           onChange={() => this.setState({call: true})}/>Yes<br />
                     <input type="radio"
-                           name="profiling"
+                           name="call"
                            value="No"
-                           checked={!this.state.profiling}
-                           onChange={() => this.setState({profiling: false})}/>No<br />
+                           checked={!this.state.call}
+                           onChange={() => this.setState({call: false})}/>No<br />
                 </Question>
 
                 <div>

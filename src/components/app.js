@@ -9,6 +9,8 @@ import S5 from './steps/s5';
 import S6 from './steps/s6';
 import S7 from './steps/s7';
 import S8 from './steps/s8';
+import S9 from './steps/s9';
+import S10 from './steps/s10';
 
 class App extends Component {
     render() {
@@ -31,6 +33,10 @@ class App extends Component {
                 return <S7 />;
             case 8:
                 return <S8 />;
+            case 9:
+                return <S9 />;
+            case 10:
+                return <S10 />;
         };
     }
 }
