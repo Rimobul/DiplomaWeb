@@ -55,13 +55,13 @@ class S5 extends Component {
                     <input type="radio"
                            name="complex"
                            value="1"
-                           checked={!this.state.complex == 1}
+                           checked={this.state.complex == 1}
                            onChange={() => this.setState({complex: 1})}/>
                     Business-grade (Complex app tightly focused on a single API or functionality)<br />
                     <input type="radio"
                            name="complex"
                            value="2"
-                           checked={!this.state.complex == 2}
+                           checked={this.state.complex == 2}
                            onChange={() => this.setState({complex: 2})}/>
                     Native-like (Complex app with: intensive calculations / complicated graphics and animations /
                     heavy use of multiple sensors or APIs)<br />

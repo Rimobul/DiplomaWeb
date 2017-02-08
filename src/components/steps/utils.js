@@ -6,8 +6,8 @@ export function isMoreOrEqual(threshold, actual, points){
     if(actual < threshold){
         return -points;
     } else if (actual === threshold){
-        return 0
-    } else return points;
+        return points;
+    } else return 0;
 }
 
 export function evaluatePoints(implementation, score){
