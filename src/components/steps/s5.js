@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {nextStep, addScore} from '../../actions/index';
-import {evaluatePoints} from './utils';
+import {evaluatePoints, isMoreOrEqual} from './utils';
 import Question from '../question';
 
 class S5 extends Component {
@@ -9,6 +9,7 @@ class S5 extends Component {
         super(props);
 
         this.state = {
+            complex: 0,
             designer: false,
             tablet: false,
             osOverrides: false
@@ -22,6 +23,8 @@ class S5 extends Component {
     getScoreArray(){
         const scoreArray = this.props.scoredFrameworks.map(f => {
             let points = 0;
+
+            points += isMoreOrEqual(this.state.complex, f.performance, 5);
             if(this.state.designer){
                 points += evaluatePoints(f.ui.designer[0], 5);
             }
@@ -40,6 +43,30 @@ class S5 extends Component {
     render() {
         return (
             <div>
+                <Question
+                    question="How would you characterize the complexity of your app?"
+                    note="TBD">
+                    <input type="radio"
+                           name="complex"
+                           value="0"
+                           checked={this.state.complex == 0}
+                           onChange={() => this.setState({complex: 0})}/>
+                    Prototype-like (Simple app / Focused on quick development)<br />
+                    <input type="radio"
+                           name="complex"
+                           value="1"
+                           checked={!this.state.complex == 1}
+                           onChange={() => this.setState({complex: 1})}/>
+                    Business-grade (Complex app tightly focused on a single API or functionality)<br />
+                    <input type="radio"
+                           name="complex"
+                           value="2"
+                           checked={!this.state.complex == 2}
+                           onChange={() => this.setState({complex: 2})}/>
+                    Native-like (Complex app with: intensive calculations / complicated graphics and animations /
+                    heavy use of multiple sensors or APIs)<br />
+                </Question>
+
                 <Question
                     question="Do you require a designer or previewer tool?"
                     note="A design or preview tool allows to see the changes in UI code immediately on a simulated
