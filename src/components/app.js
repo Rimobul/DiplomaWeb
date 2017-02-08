@@ -11,6 +11,9 @@ import S7 from './steps/s7';
 import S8 from './steps/s8';
 import S9 from './steps/s9';
 import S10 from './steps/s10';
+import S11 from './steps/s11';
+import S12 from './steps/s12';
+import S13 from './steps/s13';
 
 class App extends Component {
     render() {
@@ -37,6 +40,12 @@ class App extends Component {
                 return <S9 />;
             case 10:
                 return <S10 />;
+            case 11:
+                return <S11 />;
+            case 12:
+                return <S12 />;
+            case 13:
+                return <S13 />;
         };
     }
 }

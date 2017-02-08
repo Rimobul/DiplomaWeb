@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {nextStep, resetSteps} from '../../actions/index';
 
-class S8 extends Component {
+class S12 extends Component {
     componentDidMount () {
         window.scrollTo(0, 0)
     }
@@ -48,7 +48,7 @@ class S8 extends Component {
                         onClick={() => {
                             this.props.nextStep(this.props.currentStep)
                         }}>
-                        Refine more
+                        Still not decided?
                         <span className="glyphicon glyphicon-play"/>
                     </button>
                 </div>
@@ -64,4 +64,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {nextStep: nextStep, resetSteps: resetSteps })(S8);
+export default connect(mapStateToProps, {nextStep: nextStep, resetSteps: resetSteps })(S12);
