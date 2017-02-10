@@ -1,19 +1,19 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, addScore} from '../../actions/index';
+import {nextStep, addScore, addAnswer} from '../../actions/index';
 import {isNullOrTrue, evaluatePoints} from './utils';
 import Question from '../question';
 
 class S3 extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            background: false,
-            push: false,
-            invokeNative: false,
-            crash: false
-        };
+        console.log("S3 ctor", props);
+        // this.state = {
+        //     background: false,
+        //     push: false,
+        //     invokeNative: false,
+        //     crash: false
+        // };
     }
 
     componentDidMount() {
@@ -43,10 +43,10 @@ class S3 extends Component {
 
     getSuitableFrameworks() {
         return this.props.scoredFrameworks.filter(f =>
-            (!this.state.background || isNullOrTrue(f.backgrounding[0])) &&
-            (!this.state.push || isNullOrTrue(f.apis.pushNotifications[0])) &&
-            (!this.state.invokeNative || isNullOrTrue(f.invokeNative[0])) &&
-            (!this.state.crash || isNullOrTrue(f.testing.appMonitoring[0]))
+            (!this.props.answers.background || isNullOrTrue(f.backgrounding[0])) &&
+            (!this.props.answers.push || isNullOrTrue(f.apis.pushNotifications[0])) &&
+            (!this.props.answers.invokeNative || isNullOrTrue(f.invokeNative[0])) &&
+            (!this.props.answers.crash || isNullOrTrue(f.testing.appMonitoring[0]))
         );
     }
 
@@ -77,13 +77,13 @@ class S3 extends Component {
                     <input type="radio"
                            name="background"
                            value="Yes"
-                           checked={this.state.background}
-                           onChange={() => this.setState({background: true})}/>Yes<br />
+                           checked={this.props.answers.background}
+                           onChange={() => this.props.addAnswer(this.props.answers, {background: true})}/>Yes<br />
                     <input type="radio"
                            name="background"
                            value="No"
-                           checked={!this.state.background}
-                           onChange={() => this.setState({background: false})}/>No<br />
+                           checked={!this.props.answers.background}
+                           onChange={() => this.props.addAnswer(this.props.answers, {background: false})}/>No<br />
                 </Question>
 
                 <Question
@@ -105,13 +105,13 @@ class S3 extends Component {
                     <input type="radio"
                            name="push"
                            value="Yes"
-                           checked={this.state.push}
-                           onChange={() => this.setState({push: true})}/>Yes<br />
+                           checked={this.props.answers.push}
+                           onChange={() => this.props.addAnswer(this.props.answers, {push: true})}/>Yes<br />
                     <input type="radio"
                            name="push"
                            value="No"
-                           checked={!this.state.push}
-                           onChange={() => this.setState({push: false})}/>No<br />
+                           checked={!this.props.answers.push}
+                           onChange={() => this.props.answers(this.props.answers, {push: false})}/>No<br />
                 </Question>
 
                 <Question
@@ -125,13 +125,13 @@ class S3 extends Component {
                     <input type="radio"
                            name="invokeNative"
                            value="Yes"
-                           checked={this.state.invokeNative}
-                           onChange={() => this.setState({invokeNative: true})}/>Yes<br />
+                           checked={this.props.answers.invokeNative}
+                           onChange={() => this.props.addAnswer(this.props.answers, {invokeNative: true})}/>Yes<br />
                     <input type="radio"
                            name="invokeNative"
                            value="No"
-                           checked={!this.state.invokeNative}
-                           onChange={() => this.setState({invokeNative: false})}/>No<br />
+                           checked={!this.props.answers.invokeNative}
+                           onChange={() => this.props.answers(this.props.answers, {invokeNative: false})}/>No<br />
                 </Question>
 
                 <Question
@@ -146,13 +146,13 @@ class S3 extends Component {
                     <input type="radio"
                            name="crash"
                            value="Yes"
-                           checked={this.state.crash}
-                           onChange={() => this.setState({crash: true})}/>Yes<br />
+                           checked={this.props.answers.crash}
+                           onChange={() => this.props.addAnswer(this.props.answers, {crash: true})}/>Yes<br />
                     <input type="radio"
                            name="crash"
                            value="No"
-                           checked={!this.state.crash}
-                           onChange={() => this.setState({crash: false})}/>No<br />
+                           checked={!this.props.answers.crash}
+                           onChange={() => this.props.addAnswer(this.props.answers, {crash: false})}/>No<br />
                 </Question>
 
                 <div>
@@ -175,8 +175,12 @@ class S3 extends Component {
 function mapStateToProps(state) {
     return {
         scoredFrameworks: state.scoredFrameworks,
+        answers: state.answers,
         currentStep: state.currentStep
     }
 }
 
-export default connect(mapStateToProps, {nextStep: nextStep, addScore: addScore})(S3);
+export default connect(mapStateToProps, {
+    nextStep: nextStep,
+    addScore: addScore,
+    addAnswer: addAnswer})(S3);
