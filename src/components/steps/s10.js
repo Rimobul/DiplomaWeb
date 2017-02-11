@@ -1,30 +1,24 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, addScore} from '../../actions/index';
+import {nextStep, addScore, addAnswer} from '../../actions/index';
 import Question from '../question';
 import {evaluatePoints} from './utils';
 
 class S10 extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            multitest: false,
-            ci: false,
-            closedGroups: false
-        }
+    componentDidMount () {
+        window.scrollTo(0, 0)
     }
 
     getScoreArray(){
         const scoreArray = this.props.scoredFrameworks.map(f => {
             let points = 0;
-            if(this.state.multitest){
+            if(this.props.answers.multitest){
                 points += evaluatePoints(f.testing.multiTesting[0], 1);
             }
-            if(this.state.ci){
+            if(this.props.answers.ci){
                 points += evaluatePoints(f.testing.ci[0], 1);
             }
-            if(this.state.closedGroups){
+            if(this.props.answers.closedGroups){
                 points += evaluatePoints(f.testing.groupShipping[0], 1);
             }
             return {name: f.name, points: points};
@@ -50,13 +44,13 @@ class S10 extends Component {
                     <input type="radio"
                            name="multitest"
                            value="Yes"
-                           checked={this.state.multitest}
-                           onChange={() => this.setState({multitest: true})}/>Yes<br />
+                           checked={this.props.answers.multitest}
+                           onChange={() => this.props.addAnswer(this.props.answers, {multitest: true})}/>Yes<br />
                     <input type="radio"
                            name="multitest"
                            value="No"
-                           checked={!this.state.multitest}
-                           onChange={() => this.setState({multitest: false})}/>No<br />
+                           checked={!this.props.answers.multitest}
+                           onChange={() => this.props.addAnswer(this.props.answers, {multitest: false})}/>No<br />
                 </Question>
 
                 <Question
@@ -69,13 +63,13 @@ class S10 extends Component {
                     <input type="radio"
                            name="ci"
                            value="Yes"
-                           checked={this.state.ci}
-                           onChange={() => this.setState({ci: true})}/>Yes<br />
+                           checked={this.props.answers.ci}
+                           onChange={() => this.props.addAnswer(this.props.answers, {ci: true})}/>Yes<br />
                     <input type="radio"
                            name="ci"
                            value="No"
-                           checked={!this.state.ci}
-                           onChange={() => this.setState({ci: false})}/>No<br />
+                           checked={!this.props.answers.ci}
+                           onChange={() => this.props.addAnswer(this.props.answers, {ci: false})}/>No<br />
                 </Question>
 
                 <Question
@@ -87,13 +81,13 @@ class S10 extends Component {
                     <input type="radio"
                            name="closedGroups"
                            value="Yes"
-                           checked={this.state.closedGroups}
-                           onChange={() => this.setState({closedGroups: true})}/>Yes<br />
+                           checked={this.props.answers.closedGroups}
+                           onChange={() => this.props.addAnswer(this.props.answers, {closedGroups: true})}/>Yes<br />
                     <input type="radio"
                            name="closedGroups"
                            value="No"
-                           checked={!this.state.closedGroups}
-                           onChange={() => this.setState({closedGroups: false})}/>No<br />
+                           checked={!this.props.answers.closedGroups}
+                           onChange={() => this.props.addAnswer(this.props.answers, {closedGroups: false})}/>No<br />
                 </Question>
 
                 <div>
@@ -115,8 +109,12 @@ class S10 extends Component {
 function mapStateToProps(state) {
     return {
         currentStep: state.currentStep,
-        scoredFrameworks: state.scoredFrameworks
+        scoredFrameworks: state.scoredFrameworks,
+        answers: state.answers
     }
 }
 
-export default connect(mapStateToProps, { nextStep: nextStep, addScore: addScore })(S10);
+export default connect(mapStateToProps, {
+    nextStep: nextStep,
+    addScore: addScore,
+    addAnswer: addAnswer})(S10);

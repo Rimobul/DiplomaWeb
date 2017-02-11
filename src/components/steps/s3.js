@@ -5,17 +5,6 @@ import {isNullOrTrue, evaluatePoints} from './utils';
 import Question from '../question';
 
 class S3 extends Component {
-    constructor(props) {
-        super(props);
-        console.log("S3 ctor", props);
-        // this.state = {
-        //     background: false,
-        //     push: false,
-        //     invokeNative: false,
-        //     crash: false
-        // };
-    }
-
     componentDidMount() {
         window.scrollTo(0, 0)
     }
@@ -23,16 +12,16 @@ class S3 extends Component {
     getScoreArray(frameworks){
         const scoreArray = frameworks.map(f => {
             let points = 0;
-            if(this.state.background){
+            if(this.props.answers.background){
                 points += evaluatePoints(f.backgrounding[0], 7);
             }
-            if(this.state.push){
+            if(this.props.answers.push){
                 points += evaluatePoints(f.apis.pushNotifications[0], 7);
             }
-            if(this.state.invokeNative){
+            if(this.props.answers.invokeNative){
                 points += evaluatePoints(f.invokeNative[0], 7);
             }
-            if(this.state.crash){
+            if(this.props.answers.crash){
                 points += evaluatePoints(f.testing.appMonitoring[0], 7);
             }
             return {name: f.name, points: points};
@@ -111,7 +100,7 @@ class S3 extends Component {
                            name="push"
                            value="No"
                            checked={!this.props.answers.push}
-                           onChange={() => this.props.answers(this.props.answers, {push: false})}/>No<br />
+                           onChange={() => this.props.addAnswer(this.props.answers, {push: false})}/>No<br />
                 </Question>
 
                 <Question
@@ -131,7 +120,7 @@ class S3 extends Component {
                            name="invokeNative"
                            value="No"
                            checked={!this.props.answers.invokeNative}
-                           onChange={() => this.props.answers(this.props.answers, {invokeNative: false})}/>No<br />
+                           onChange={() => this.props.addAnswer(this.props.answers, {invokeNative: false})}/>No<br />
                 </Question>
 
                 <Question

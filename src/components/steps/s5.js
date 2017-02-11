@@ -1,21 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, addScore} from '../../actions/index';
+import {nextStep, addScore, addAnswer} from '../../actions/index';
 import {evaluatePoints, isMoreOrEqual} from './utils';
 import Question from '../question';
 
 class S5 extends Component {
-    constructor(props){
-        super(props);
-
-        this.state = {
-            complex: 0,
-            designer: false,
-            tablet: false,
-            osOverrides: false
-        }
-    }
-
     componentDidMount () {
         window.scrollTo(0, 0)
     }
@@ -24,14 +13,14 @@ class S5 extends Component {
         const scoreArray = this.props.scoredFrameworks.map(f => {
             let points = 0;
 
-            points += isMoreOrEqual(this.state.complex, f.performance, 5);
-            if(this.state.designer){
+            points += isMoreOrEqual(this.props.answers.complex, f.performance, 5);
+            if(this.props.answers.designer){
                 points += evaluatePoints(f.ui.designer[0], 5);
             }
-            if(this.state.tablet){
+            if(this.props.answers.tablet){
                 points += evaluatePoints(f.ui.tabletLayout[0], 5);
             }
-            if(this.state.osOverrides){
+            if(this.props.answers.osOverrides){
                 points += evaluatePoints(f.osOverrides[0], 5);
             }
             return {name: f.name, points: points};
@@ -49,20 +38,20 @@ class S5 extends Component {
                     <input type="radio"
                            name="complex"
                            value="0"
-                           checked={this.state.complex == 0}
-                           onChange={() => this.setState({complex: 0})}/>
+                           checked={this.props.answers.complex == 0}
+                           onChange={() => this.props.addAnswer(this.props.answers, {complex: 0})}/>
                     Prototype-like (Simple app / Focused on quick development)<br />
                     <input type="radio"
                            name="complex"
                            value="1"
-                           checked={this.state.complex == 1}
-                           onChange={() => this.setState({complex: 1})}/>
+                           checked={this.props.answers.complex == 1}
+                           onChange={() => this.props.addAnswer(this.props.answers, {complex: 1})}/>
                     Business-grade (Complex app tightly focused on a single API or functionality)<br />
                     <input type="radio"
                            name="complex"
                            value="2"
-                           checked={this.state.complex == 2}
-                           onChange={() => this.setState({complex: 2})}/>
+                           checked={this.props.answers.complex == 2}
+                           onChange={() => this.props.addAnswer(this.props.answers, {complex: 2})}/>
                     Native-like (Complex app with: intensive calculations / complicated graphics and animations /
                     heavy use of multiple sensors or APIs)<br />
                 </Question>
@@ -76,13 +65,13 @@ class S5 extends Component {
                     <input type="radio"
                            name="designer"
                            value="Yes"
-                           checked={this.state.designer}
-                           onChange={() => this.setState({designer: true})}/>Yes<br />
+                           checked={this.props.answers.designer}
+                           onChange={() => this.props.addAnswer(this.props.answers, {designer: true})}/>Yes<br />
                     <input type="radio"
                            name="designer"
                            value="No"
-                           checked={!this.state.designer}
-                           onChange={() => this.setState({designer: false})}/>No<br />
+                           checked={!this.props.answers.designer}
+                           onChange={() => this.props.addAnswer(this.props.answers, {designer: false})}/>No<br />
                 </Question>
 
                 <Question
@@ -97,13 +86,13 @@ class S5 extends Component {
                     <input type="radio"
                            name="tablet"
                            value="Yes"
-                           checked={this.state.tablet}
-                           onChange={() => this.setState({tablet: true})}/>Yes<br />
+                           checked={this.props.answers.tablet}
+                           onChange={() => this.props.addAnswer(this.props.answers, {tablet: true})}/>Yes<br />
                     <input type="radio"
                            name="tablet"
                            value="No"
-                           checked={!this.state.tablet}
-                           onChange={() => this.setState({tablet: false})}/>No<br />
+                           checked={!this.props.answers.tablet}
+                           onChange={() => this.props.addAnswer(this.props.answers, {tablet: false})}/>No<br />
                 </Question>
 
                 <Question
@@ -116,13 +105,13 @@ class S5 extends Component {
                     <input type="radio"
                            name="osOverrides"
                            value="Yes"
-                           checked={this.state.osOverrides}
-                           onChange={() => this.setState({osOverrides: true})}/>Yes<br />
+                           checked={this.props.answers.osOverrides}
+                           onChange={() => this.props.addAnswer(this.props.answers, {osOverrides: true})}/>Yes<br />
                     <input type="radio"
                            name="osOverrides"
                            value="No"
-                           checked={!this.state.osOverrides}
-                           onChange={() => this.setState({osOverrides: false})}/>No<br />
+                           checked={!this.props.answers.osOverrides}
+                           onChange={() => this.props.addAnswer(this.props.answers, {osOverrides: false})}/>No<br />
                 </Question>
 
                 <div>
@@ -144,10 +133,12 @@ class S5 extends Component {
 function mapStateToProps(state) {
     return {
         scoredFrameworks: state.scoredFrameworks,
-        currentStep: state.currentStep
+        currentStep: state.currentStep,
+        answers: state.answers
     }
 }
 
 export default connect(mapStateToProps, {
     nextStep: nextStep,
-    addScore: addScore})(S5);
+    addScore: addScore,
+    addAnswer: addAnswer})(S5);

@@ -1,30 +1,24 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, addScore} from '../../actions/index';
+import {nextStep, addScore, addAnswer} from '../../actions/index';
 import Question from '../question';
 import {evaluatePoints} from './utils';
 
 class S11 extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            openGl: false,
-            games: false,
-            avr: false
-        }
+    componentDidMount () {
+        window.scrollTo(0, 0)
     }
 
     getScoreArray(){
         const scoreArray = this.props.scoredFrameworks.map(f => {
             let points = 0;
-            if(this.state.openGl){
+            if(this.props.answers.openGl){
                 points += evaluatePoints(f.openGl[0], 1);
             }
-            if(this.state.games){
+            if(this.props.answers.games){
                 points += evaluatePoints(f.games[0], 1);
             }
-            if(this.state.avr){
+            if(this.props.answers.avr){
                 points += evaluatePoints(f.augmentedVirtual[0], 1);
             }
             return {name: f.name, points: points};
@@ -46,13 +40,13 @@ class S11 extends Component {
                     <input type="radio"
                            name="openGl"
                            value="Yes"
-                           checked={this.state.openGl}
-                           onChange={() => this.setState({openGl: true})}/>Yes<br />
+                           checked={this.props.answers.openGl}
+                           onChange={() => this.props.addAnswer(this.props.answers, {openGl: true})}/>Yes<br />
                     <input type="radio"
                            name="openGl"
                            value="No"
-                           checked={!this.state.openGl}
-                           onChange={() => this.setState({openGl: false})}/>No<br />
+                           checked={!this.props.answers.openGl}
+                           onChange={() => this.props.addAnswer(this.props.answers, {openGl: false})}/>No<br />
                 </Question>
 
                 <Question
@@ -63,13 +57,13 @@ class S11 extends Component {
                     <input type="radio"
                            name="games"
                            value="Yes"
-                           checked={this.state.games}
-                           onChange={() => this.setState({games: true})}/>Yes<br />
+                           checked={this.props.answers.games}
+                           onChange={() => this.props.addAnswer(this.props.answers, {games: true})}/>Yes<br />
                     <input type="radio"
                            name="games"
                            value="No"
-                           checked={!this.state.games}
-                           onChange={() => this.setState({games: false})}/>No<br />
+                           checked={!this.props.answers.games}
+                           onChange={() => this.props.addAnswer(this.props.answers, {games: false})}/>No<br />
                 </Question>
 
                 <Question
@@ -80,13 +74,13 @@ class S11 extends Component {
                     <input type="radio"
                            name="avr"
                            value="Yes"
-                           checked={this.state.avr}
-                           onChange={() => this.setState({avr: true})}/>Yes<br />
+                           checked={this.props.answers.avr}
+                           onChange={() => this.props.addAnswer(this.props.answers, {avr: true})}/>Yes<br />
                     <input type="radio"
                            name="avr"
                            value="No"
-                           checked={!this.state.avr}
-                           onChange={() => this.setState({avr: false})}/>No<br />
+                           checked={!this.props.answers.avr}
+                           onChange={() => this.props.addAnswer(this.props.answers, {avr: false})}/>No<br />
                 </Question>
 
                 <div>
@@ -108,8 +102,12 @@ class S11 extends Component {
 function mapStateToProps(state) {
     return {
         currentStep: state.currentStep,
-        scoredFrameworks: state.scoredFrameworks
+        scoredFrameworks: state.scoredFrameworks,
+        answers: state.answers
     }
 }
 
-export default connect(mapStateToProps, { nextStep: nextStep, addScore: addScore })(S11);
+export default connect(mapStateToProps, {
+    nextStep: nextStep,
+    addScore: addScore,
+    addAnswer: addAnswer})(S11);

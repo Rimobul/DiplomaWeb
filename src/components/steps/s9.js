@@ -1,32 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, addScore} from '../../actions/index';
+import {nextStep, addScore, addAnswer} from '../../actions/index';
 import {evaluatePoints, isNullOrTrue} from './utils';
 import Question from '../question';
 
 class S9 extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            angular: false,
-            basic: false,
-            cpp: false,
-            csharp: false,
-            delphi: false,
-            js: false,
-            java: false,
-            lua: false,
-            python: false,
-            react: false,
-            ruby: false,
-            codefree: false,
-            mbaas: false,
-            browser: false,
-            call: false
-        }
-    }
-
     componentDidMount () {
         window.scrollTo(0, 0)
     }
@@ -34,49 +12,49 @@ class S9 extends Component {
     getScoreArray(){
         const scoreArray = this.props.scoredFrameworks.map(f => {
             let points = 0;
-            if(this.state.angular){
+            if(this.props.answers.angular){
                 points += evaluatePoints(f.languages.some(l => l === "Angular"), 1);
             }
-            if(this.state.basic){
+            if(this.props.answers.basic){
                 points += evaluatePoints(f.languages.some(l => l === "BASIC"), 1);
             }
-            if(this.state.cpp){
+            if(this.props.answers.cpp){
                 points += evaluatePoints(f.languages.some(l => l === "C++"), 1);
             }
-            if(this.state.csharp){
+            if(this.props.answers.csharp){
                 points += evaluatePoints(f.languages.some(l => l === "C#"), 1);
             }
-            if(this.state.delphi){
+            if(this.props.answers.delphi){
                 points += evaluatePoints(f.languages.some(l => l === "Delphi"), 1);
             }
-            if(this.state.js){
+            if(this.props.answers.js){
                 points += evaluatePoints(f.languages.some(l => l === "JavaScript"), 1);
             }
-            if(this.state.java){
+            if(this.props.answers.java){
                 points += evaluatePoints(f.languages.some(l => l === "Java"), 1);
             }
-            if(this.state.lua){
+            if(this.props.answers.lua){
                 points += evaluatePoints(f.languages.some(l => l === "Lua"), 1);
             }
-            if(this.state.python){
+            if(this.props.answers.python){
                 points += evaluatePoints(f.languages.some(l => l === "Python"), 1);
             }
-            if(this.state.react){
+            if(this.props.answers.react){
                 points += evaluatePoints(f.languages.some(l => l === "React"), 1);
             }
-            if(this.state.ruby){
+            if(this.props.answers.ruby){
                 points += evaluatePoints(f.languages.some(l => l === "Ruby"), 1);
             }
-            if(this.state.codefree){
+            if(this.props.answers.codefree){
                 points += evaluatePoints(f.languages.some(l => l === "Code-free"), 1);
             }
-            if(this.state.mbaas){
+            if(this.props.answers.mbaas){
                 points += evaluatePoints(f.mbaas[0], 1);
             }
-            if(this.state.browser){
+            if(this.props.answers.browser){
                 points += evaluatePoints(f.apis.embeddedBrowser[0], 1);
             }
-            if(this.state.call){
+            if(this.props.answers.call){
                 points += evaluatePoints(isNullOrTrue(f.apis.addressBook[0]) && isNullOrTrue(f.apis.callSms[0]), 1);
             }
             return {name: f.name, points: points};
@@ -98,52 +76,52 @@ class S9 extends Component {
                     for each major programming language (BASIC, C++, C#, Delphi, Java, Lua, Python, Ruby). There are
                     even a few tools which allow code-free visual app building.">
                     <input type="checkbox"
-                           checked={this.state.angular}
-                           onClick={() => this.setState({angular: !this.state.angular})}/>
+                           checked={this.props.answers.angular}
+                           onClick={() => this.props.addAnswer(this.props.answers, {angular: !this.props.answers.angular})}/>
                     AngularJS<br />
                     <input type="checkbox"
-                           checked={this.state.basic}
-                           onClick={() => this.setState({basic: !this.state.basic})}/>
+                           checked={this.props.answers.basic}
+                           onClick={() => this.props.addAnswer(this.props.answers, {basic: !this.props.answers.basic})}/>
                     BASIC<br/>
                     <input type="checkbox"
-                           checked={this.state.cpp}
-                           onClick={() => this.setState({cpp: !this.state.cpp})}/>
+                           checked={this.props.answers.cpp}
+                           onClick={() => this.props.addAnswer(this.props.answers, {cpp: !this.props.answers.cpp})}/>
                     C++<br/>
                     <input type="checkbox"
-                           checked={this.state.csharp}
-                           onClick={() => this.setState({csharp: !this.state.csharp})}/>
+                           checked={this.props.answers.csharp}
+                           onClick={() => this.props.addAnswer(this.props.answers, {csharp: !this.props.answers.csharp})}/>
                     C#<br />
                     <input type="checkbox"
-                           checked={this.state.delphi}
-                           onClick={() => this.setState({delphi: !this.state.delphi})}/>
+                           checked={this.props.answers.delphi}
+                           onClick={() => this.props.addAnswer(this.props.answers, {delphi: !this.props.answers.delphi})}/>
                     Delphi<br />
                     <input type="checkbox"
-                           checked={this.state.js}
-                           onClick={() => this.setState({js: !this.state.js})}/>
+                           checked={this.props.answers.js}
+                           onClick={() => this.props.addAnswer(this.props.answers, {js: !this.props.answers.js})}/>
                     JavaScript (or an alternative, like CoffeeScript or TypeScript)<br />
                     <input type="checkbox"
-                           checked={this.state.java}
-                           onClick={() => this.setState({java: !this.state.java})}/>
+                           checked={this.props.answers.java}
+                           onClick={() => this.props.addAnswer(this.props.answers, {java: !this.props.answers.java})}/>
                     Java<br />
                     <input type="checkbox"
-                           checked={this.state.lua}
-                           onClick={() => this.setState({lua: !this.state.lua})}/>
+                           checked={this.props.answers.lua}
+                           onClick={() => this.props.addAnswer(this.props.answers, {lua: !this.props.answers.lua})}/>
                     Lua<br />
                     <input type="checkbox"
-                           checked={this.state.python}
-                           onClick={() => this.setState({python: !this.state.python})}/>
+                           checked={this.props.answers.python}
+                           onClick={() => this.props.addAnswer(this.props.answers, {python: !this.props.answers.python})}/>
                     Python<br />
                     <input type="checkbox"
-                           checked={this.state.react}
-                           onClick={() => this.setState({react: !this.state.react})}/>
+                           checked={this.props.answers.react}
+                           onClick={() => this.props.addAnswer(this.props.answers, {react: !this.props.answers.react})}/>
                     ReactJS<br />
                     <input type="checkbox"
-                           checked={this.state.ruby}
-                           onClick={() => this.setState({ruby: !this.state.ruby})}/>
+                           checked={this.props.answers.ruby}
+                           onClick={() => this.props.addAnswer(this.props.answers, {ruby: !this.props.answers.ruby})}/>
                     Ruby<br />
                     <input type="checkbox"
-                           checked={this.state.codefree}
-                           onClick={() => this.setState({codefree: !this.state.codefree})}/>
+                           checked={this.props.answers.codefree}
+                           onClick={() => this.props.addAnswer(this.props.answers, {codefree: !this.props.answers.codefree})}/>
                     I am looking for a code-free solution<br/>
                 </Question>
 
@@ -156,13 +134,13 @@ class S9 extends Component {
                     <input type="radio"
                            name="mbaas"
                            value="Yes"
-                           checked={this.state.mbaas}
-                           onChange={() => this.setState({mbaas: true})}/>Yes<br />
+                           checked={this.props.answers.mbaas}
+                           onChange={() => this.props.addAnswer(this.props.answers, {mbaas: true})}/>Yes<br />
                     <input type="radio"
                            name="mbaas"
                            value="No"
-                           checked={!this.state.mbaas}
-                           onChange={() => this.setState({mbaas: false})}/>No<br />
+                           checked={!this.props.answers.mbaas}
+                           onChange={() => this.props.addAnswer(this.props.answers, {mbaas: false})}/>No<br />
                 </Question>
 
                 <Question
@@ -175,13 +153,13 @@ class S9 extends Component {
                     <input type="radio"
                            name="browser"
                            value="Yes"
-                           checked={this.state.browser}
-                           onChange={() => this.setState({browser: true})}/>Yes<br />
+                           checked={this.props.answers.browser}
+                           onChange={() => this.props.addAnswer(this.props.answers, {browser: true})}/>Yes<br />
                     <input type="radio"
                            name="browser"
                            value="No"
-                           checked={!this.state.browser}
-                           onChange={() => this.setState({browser: false})}/>No<br />
+                           checked={!this.props.answers.browser}
+                           onChange={() => this.props.addAnswer(this.props.answers, {browser: false})}/>No<br />
                 </Question>
 
                 <Question
@@ -193,13 +171,13 @@ class S9 extends Component {
                     <input type="radio"
                            name="call"
                            value="Yes"
-                           checked={this.state.call}
-                           onChange={() => this.setState({call: true})}/>Yes<br />
+                           checked={this.props.answers.call}
+                           onChange={() => this.props.addAnswer(this.props.answers, {call: true})}/>Yes<br />
                     <input type="radio"
                            name="call"
                            value="No"
-                           checked={!this.state.call}
-                           onChange={() => this.setState({call: false})}/>No<br />
+                           checked={!this.props.answers.call}
+                           onChange={() => this.props.addAnswer(this.props.answers, {call: false})}/>No<br />
                 </Question>
 
                 <div>
@@ -221,8 +199,12 @@ class S9 extends Component {
 function mapStateToProps(state) {
     return {
         currentStep: state.currentStep,
-        scoredFrameworks: state.scoredFrameworks
+        scoredFrameworks: state.scoredFrameworks,
+        answers: state.answers
     }
 }
 
-export default connect(mapStateToProps, { nextStep: nextStep, addScore: addScore })(S9);
+export default connect(mapStateToProps, {
+    nextStep: nextStep,
+    addScore: addScore,
+    addAnswer: addAnswer})(S9);

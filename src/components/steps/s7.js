@@ -1,21 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, addScore} from '../../actions/index';
+import {nextStep, addScore, addAnswer} from '../../actions/index';
 import {evaluatePoints} from './utils';
 import Question from '../question';
 
 class S7 extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            debug: false,
-            unit: false,
-            uiTesting: false,
-            profiling: false
-        }
-    }
-
     componentDidMount () {
         window.scrollTo(0, 0)
     }
@@ -23,16 +12,16 @@ class S7 extends Component {
     getScoreArray(){
         const scoreArray = this.props.scoredFrameworks.map(f => {
             let points = 0;
-            if(this.state.debug){
+            if(this.props.answers.debug){
                 points += evaluatePoints(f.testing.debugging[0], 5);
             }
-            if(this.state.unit){
+            if(this.props.answers.unit){
                 points += evaluatePoints(f.testing.unitTest[0], 5);
             }
-            if(this.state.uiTesting){
+            if(this.props.answers.uiTesting){
                 points += evaluatePoints(f.testing.uiTest[0], 5);
             }
-            if(this.state.profiling){
+            if(this.props.answers.profiling){
                 points += evaluatePoints(f.testing.appProfiling[0], 5);
             }
             return {name: f.name, points: points};
@@ -52,13 +41,13 @@ class S7 extends Component {
                     <input type="radio"
                            name="debug"
                            value="Yes"
-                           checked={this.state.debug}
-                           onChange={() => this.setState({debug: true})}/>Yes<br />
+                           checked={this.props.answers.debug}
+                           onChange={() => this.props.addAnswer(this.props.answers, {debug: true})}/>Yes<br />
                     <input type="radio"
                            name="debug"
                            value="No"
-                           checked={!this.state.debug}
-                           onChange={() => this.setState({debug: false})}/>No<br />
+                           checked={!this.props.answers.debug}
+                           onChange={() => this.props.addAnswer(this.props.answers, {debug: false})}/>No<br />
                 </Question>
 
                 <Question
@@ -70,13 +59,13 @@ class S7 extends Component {
                     <input type="radio"
                            name="unit"
                            value="Yes"
-                           checked={this.state.unit}
-                           onChange={() => this.setState({unit: true})}/>Yes<br />
+                           checked={this.props.answers.unit}
+                           onChange={() => this.props.addAnswer(this.props.answers, {unit: true})}/>Yes<br />
                     <input type="radio"
                            name="unit"
                            value="No"
-                           checked={!this.state.unit}
-                           onChange={() => this.setState({unit: false})}/>No<br />
+                           checked={!this.props.answers.unit}
+                           onChange={() => this.props.addAnswer(this.props.answers, {unit: false})}/>No<br />
                 </Question>
 
                 <Question
@@ -88,13 +77,13 @@ class S7 extends Component {
                     <input type="radio"
                            name="uiTesting"
                            value="Yes"
-                           checked={this.state.uiTesting}
-                           onChange={() => this.setState({uiTesting: true})}/>Yes<br />
+                           checked={this.props.answers.uiTesting}
+                           onChange={() => this.props.addAnswer(this.props.answers, {uiTesting: true})}/>Yes<br />
                     <input type="radio"
                            name="uiTesting"
                            value="No"
-                           checked={!this.state.uiTesting}
-                           onChange={() => this.setState({uiTesting: false})}/>No<br />
+                           checked={!this.props.answers.uiTesting}
+                           onChange={() => this.props.addAnswer(this.props.answers, {uiTesting: false})}/>No<br />
                 </Question>
 
                 <Question
@@ -105,13 +94,13 @@ class S7 extends Component {
                     <input type="radio"
                            name="profiling"
                            value="Yes"
-                           checked={this.state.profiling}
-                           onChange={() => this.setState({profiling: true})}/>Yes<br />
+                           checked={this.props.answers.profiling}
+                           onChange={() => this.props.addAnswer(this.props.answers, {profiling: true})}/>Yes<br />
                     <input type="radio"
                            name="profiling"
                            value="No"
-                           checked={!this.state.profiling}
-                           onChange={() => this.setState({profiling: false})}/>No<br />
+                           checked={!this.props.answers.profiling}
+                           onChange={() => this.props.addAnswer(this.props.answers, {profiling: false})}/>No<br />
                 </Question>
 
                 <div>
@@ -133,8 +122,12 @@ class S7 extends Component {
 function mapStateToProps(state) {
     return {
         currentStep: state.currentStep,
-        scoredFrameworks: state.scoredFrameworks
+        scoredFrameworks: state.scoredFrameworks,
+        answers: state.answers
     }
 }
 
-export default connect(mapStateToProps, { nextStep: nextStep, addScore: addScore })(S7);
+export default connect(mapStateToProps, {
+    nextStep: nextStep,
+    addScore: addScore,
+    addAnswer: addAnswer})(S7);
