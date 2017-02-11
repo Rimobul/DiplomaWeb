@@ -1,30 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, addScore} from '../../actions/index';
+import {nextStep, addScore, addAnswer} from '../../actions/index';
 import Question from '../question';
 import {evaluatePoints} from './utils';
 
 class S6 extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            files: false,
-            couchbase: false,
-            realm: false,
-            sqlite: false,
-            otherDb: false,
-            bluetooth: false,
-            nfc: false,
-            fingerprint: false,
-            barcode: false,
-            alexa: false,
-            cortana: false,
-            now: false,
-            siri: false
-        }
-    }
-
     componentDidMount () {
         window.scrollTo(0, 0)
     }
@@ -32,43 +12,43 @@ class S6 extends Component {
     getScoreArray(){
         const scoreArray = this.props.scoredFrameworks.map(f => {
             let points = 0;
-            if(this.state.files){
+            if(this.props.answers.files){
                 points += evaluatePoints(f.apis.fileSystem[0], 5);
             }
-            if(this.state.couchbase){
+            if(this.props.answers.couchbase){
                 points += evaluatePoints(f.databases.some(d => d === "Couchbase"), 5);
             }
-            if(this.state.realm){
+            if(this.props.answers.realm){
                 points += evaluatePoints(f.databases.some(d => d === "Realm"), 5);
             }
-            if(this.state.sqlite){
+            if(this.props.answers.sqlite){
                 points += evaluatePoints(f.databases.some(d => d === "SQLite"), 5);
             }
-            if(this.state.otherDb){
+            if(this.props.answers.otherDb){
                 points += evaluatePoints(f.databases.some(d => d != "SQLite" && d != "Realm" && d != "Couchbase"), 5);
             }
-            if(this.state.bluetooth){
+            if(this.props.answers.bluetooth){
                 points += evaluatePoints(f.sensors.bluetooth[0], 5);
             }
-            if(this.state.nfc){
+            if(this.props.answers.nfc){
                 points += evaluatePoints(f.sensors.nfc[0], 5);
             }
-            if(this.state.fingerprint){
+            if(this.props.answers.fingerprint){
                 points += evaluatePoints(f.sensors.fingerprint[0], 5);
             }
-            if(this.state.barcode){
+            if(this.props.answers.barcode){
                 points += evaluatePoints(f.sensors.barcode[0], 5);
             }
-            if(this.state.alexa){
+            if(this.props.answers.alexa){
                 points += evaluatePoints(f.assistants.some(d => d === "Alexa"), 5);
             }
-            if(this.state.cortana){
+            if(this.props.answers.cortana){
                 points += evaluatePoints(f.assistants.some(d => d === "Cortana"), 5);
             }
-            if(this.state.now){
+            if(this.props.answers.now){
                 points += evaluatePoints(f.assistants.some(d => d === "GoogleAssistant"), 5);
             }
-            if(this.state.siri){
+            if(this.props.answers.siri){
                 points += evaluatePoints(f.assistants.some(d => d === "Siri"), 5);
             }
             return {name: f.name, points: points};
@@ -88,13 +68,13 @@ class S6 extends Component {
                     <input type="radio"
                            name="files"
                            value="Yes"
-                           checked={this.state.files}
-                           onChange={() => this.setState({files: true})}/>Yes<br />
+                           checked={this.props.answers.files}
+                           onChange={() => this.props.addAnswer(this.props.answers, {files: true})}/>Yes<br />
                     <input type="radio"
                            name="files"
                            value="No"
-                           checked={!this.state.files}
-                           onChange={() => this.setState({files: false})}/>No<br />
+                           checked={!this.props.answers.files}
+                           onChange={() => this.props.addAnswer(this.props.answers, {files: false})}/>No<br />
                 </Question>
 
                 <Question
@@ -108,20 +88,20 @@ class S6 extends Component {
                     and ViziApps are the only two multi-platform development tools not allowing any client-side data
                     storage, since they rely on all data being stored in the cloud.">
                     <input type="checkbox"
-                           checked={this.state.couchbase}
-                           onClick={() => this.setState({couchbase: !this.state.couchbase})}/>
+                           checked={this.props.answers.couchbase}
+                           onClick={() => this.props.addAnswer(this.props.answers, {couchbase: !this.props.answers.couchbase})}/>
                     CouchBase<br />
                     <input type="checkbox"
-                           checked={this.state.realm}
-                           onClick={() => this.setState({realm: !this.state.realm})}/>
+                           checked={this.props.answers.realm}
+                           onClick={() => this.props.addAnswer(this.props.answers, {realm: !this.props.answers.realm})}/>
                     Realm<br/>
                     <input type="checkbox"
-                           checked={this.state.sqlite}
-                           onClick={() => this.setState({sqlite: !this.state.sqlite})}/>
+                           checked={this.props.answers.sqlite}
+                           onClick={() => this.props.addAnswer(this.props.answers, {sqlite: !this.props.answers.sqlite})}/>
                     SQLite<br/>
                     <input type="checkbox"
-                           checked={this.state.otherDb}
-                           onClick={() => this.setState({otherDb: !this.state.otherDb})}/>
+                           checked={this.props.answers.otherDb}
+                           onClick={() => this.props.addAnswer(this.props.answers, {otherDb: !this.props.answers.otherDb})}/>
                     Other<br/>
                 </Question>
 
@@ -134,20 +114,20 @@ class S6 extends Component {
                     is true also for the barcode or QR scanner - although it is captured by camera, it is processed
                     usually by the native API.">
                     <input type="checkbox"
-                           checked={this.state.bluetooth}
-                           onClick={() => this.setState({bluetooth: !this.state.bluetooth})}/>
+                           checked={this.props.answers.bluetooth}
+                           onClick={() => this.props.addAnswer(this.props.answers, {bluetooth: !this.props.answers.bluetooth})}/>
                     Bluetooth<br />
                     <input type="checkbox"
-                           checked={this.state.nfc}
-                           onClick={() => this.setState({nfc: !this.state.nfc})}/>
+                           checked={this.props.answers.nfc}
+                           onClick={() => this.props.addAnswer(this.props.answers, {nfc: !this.props.answers.nfc})}/>
                     NFC<br/>
                     <input type="checkbox"
-                           checked={this.state.fingerprint}
-                           onClick={() => this.setState({fingerprint: !this.state.fingerprint})}/>
+                           checked={this.props.answers.fingerprint}
+                           onClick={() => this.props.addAnswer(this.props.answers, {fingerprint: !this.props.answers.fingerprint})}/>
                     Fingerprint scanner<br/>
                     <input type="checkbox"
-                           checked={this.state.barcode}
-                           onClick={() => this.setState({barcode: !this.state.barcode})}/>
+                           checked={this.props.answers.barcode}
+                           onClick={() => this.props.addAnswer(this.props.answers, {barcode: !this.props.answers.barcode})}/>
                     Barcode or QR-code scanner<br/>
                 </Question>
 
@@ -159,20 +139,20 @@ class S6 extends Component {
                     be popular, it should communicate with the virtual assistant. Not all tools provide necessary
                     support for this behaviour.">
                     <input type="checkbox"
-                           checked={this.state.alexa}
-                           onClick={() => this.setState({alexa: !this.state.alexa})}/>
+                           checked={this.props.answers.alexa}
+                           onClick={() => this.props.addAnswer(this.props.answers, {alexa: !this.props.answers.alexa})}/>
                     Amazon Alexa<br />
                     <input type="checkbox"
-                           checked={this.state.cortana}
-                           onClick={() => this.setState({cortana: !this.state.cortana})}/>
+                           checked={this.props.answers.cortana}
+                           onClick={() => this.props.addAnswer(this.props.answers, {cortana: !this.props.answers.cortana})}/>
                     Microsoft Cortana<br/>
                     <input type="checkbox"
-                           checked={this.state.now}
-                           onClick={() => this.setState({now: !this.state.now})}/>
+                           checked={this.props.answers.now}
+                           onClick={() => this.props.addAnswer(this.props.answers, {now: !this.props.answers.now})}/>
                     Google Now or Google Assistant<br/>
                     <input type="checkbox"
-                           checked={this.state.siri}
-                           onClick={() => this.setState({siri: !this.state.siri})}/>
+                           checked={this.props.answers.siri}
+                           onClick={() => this.props.addAnswer(this.props.answers, {siri: !this.props.answers.siri})}/>
                     Apple Siri<br/>
                 </Question>
 
@@ -195,8 +175,12 @@ class S6 extends Component {
 function mapStateToProps(state) {
     return {
         currentStep: state.currentStep,
-        scoredFrameworks: state.scoredFrameworks
+        scoredFrameworks: state.scoredFrameworks,
+        answers: state.answers
     }
 }
 
-export default connect(mapStateToProps, { nextStep: nextStep, addScore: addScore })(S6);
+export default connect(mapStateToProps, {
+    nextStep: nextStep,
+    addScore: addScore,
+    addAnswer: addAnswer})(S6);

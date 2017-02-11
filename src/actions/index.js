@@ -1,6 +1,7 @@
 export const CURRENT_STEP = 'CURRENT_STEP';
 //export const FILTER_FRAMEWORKS = 'FILTER_FRAMEWORKS';
 export const SCORED_FRAMEWORKS = 'SCORED_FRAMEWORKS';
+export const ADD_ANSWER = 'ADD_ANSWER';
 
 export function nextStep(currentStep) {
     return {
@@ -24,10 +25,19 @@ export function resetSteps() {
 // }
 
 export function addScore(frameworks, score) {
-    console.log("Adding score", frameworks, score);
+    //console.log("Adding score", frameworks, score);
 
     return {
         type: SCORED_FRAMEWORKS,
         payload: { frameworks: frameworks, score: score}
+    }
+}
+
+export function addAnswer(oldAnswers, newSubset){
+    console.log("Adding answers", oldAnswers, newSubset);
+
+    return {
+        type: ADD_ANSWER,
+        payload: {oldAnswers: oldAnswers, newSubset: newSubset}
     }
 }

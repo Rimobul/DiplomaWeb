@@ -1,29 +1,10 @@
 import React, {Component} from 'react';
 import {isNullOrTrue, evaluatePoints} from './utils';
 import {connect} from 'react-redux';
-import {nextStep, addScore} from '../../actions/index';
+import {nextStep, addScore, addAnswer} from '../../actions/index';
 import Question from '../question';
 
 class S1 extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            android: false,
-            ios: false,
-            blackBerry: false,
-            windowsPhone: false,
-            linux: false,
-            macOs: false,
-            windows: false,
-            web: false,
-            iOSnonMac: false,
-            winNonWin: false,
-            size: 1,
-            price: 12000
-        }
-    }
-
     componentDidMount() {
         window.scrollTo(0, 0)
     }
@@ -31,34 +12,34 @@ class S1 extends Component {
     getScoreArray(frameworks){
         const scoreArray = frameworks.map(f => {
             let points = 0;
-            if(this.state.android){
+            if(this.props.answers.android){
                 points += evaluatePoints(f.mobileOs.android[0], 7);
             }
-            if(this.state.ios){
+            if(this.props.answers.ios){
                 points += evaluatePoints(f.mobileOs.ios[0], 7);
             }
-            if(this.state.windowsPhone){
+            if(this.props.answers.windowsPhone){
                 points += evaluatePoints(f.mobileOs.windows[0], 7);
             }
-            if(this.state.blackBerry){
+            if(this.props.answers.blackBerry){
                 points += evaluatePoints(f.mobileOs.blackBerry[0], 7);
             }
-            if(this.state.linux){
+            if(this.props.answers.linux){
                 points += evaluatePoints(f.desktopOs.linux[0], 7);
             }
-            if(this.state.macOs){
+            if(this.props.answers.macOs){
                 points += evaluatePoints(f.desktopOs.macOs[0], 7);
             }
-            if(this.state.windows){
+            if(this.props.answers.windows){
                 points += evaluatePoints(f.desktopOs.windows[0], 7);
             }
-            if(this.state.web){
+            if(this.props.answers.web){
                 points += evaluatePoints(f.desktopOs.web[0], 7);
             }
-            if(this.state.iOSnonMac){
+            if(this.props.answers.iOSnonMac){
                 points += evaluatePoints(f.desktopOs.iOSnonMac[0], 7);
             }
-            if(this.state.winNonWin){
+            if(this.props.answers.winNonWin){
                 points += evaluatePoints(f.desktopOs.winNonWin[0], 7);
             }
             return {name: f.name, points: points};
@@ -98,27 +79,27 @@ class S1 extends Component {
     }
 
     canBeDevelopedOnSelectedDesktop(framework) {
-        return (this.state.linux && isNullOrTrue(framework.desktopOs.linux[0])) ||
-            (this.state.macOs && isNullOrTrue(framework.desktopOs.macOs[0])) ||
-            (this.state.windows && isNullOrTrue(framework.desktopOs.windows[0])) ||
-            (this.state.web && isNullOrTrue(framework.desktopOs.web[0]));
+        return (this.props.answers.linux && isNullOrTrue(framework.desktopOs.linux[0])) ||
+            (this.props.answers.macOs && isNullOrTrue(framework.desktopOs.macOs[0])) ||
+            (this.props.answers.windows && isNullOrTrue(framework.desktopOs.windows[0])) ||
+            (this.props.answers.web && isNullOrTrue(framework.desktopOs.web[0]));
     }
 
     getSuitableFrameworks() {
         return this.props.allFrameworks.filter(f =>
-            (!this.state.android || isNullOrTrue(f.mobileOs.android[0])) &&
-            (!this.state.ios || isNullOrTrue(f.mobileOs.ios[0])) &&
-            (!this.state.blackBerry || isNullOrTrue(f.mobileOs.blackBerry[0])) &&
-            (!this.state.windowsPhone || isNullOrTrue(f.mobileOs.windows[0])) &&
+            (!this.props.answers.android || isNullOrTrue(f.mobileOs.android[0])) &&
+            (!this.props.answers.ios || isNullOrTrue(f.mobileOs.ios[0])) &&
+            (!this.props.answers.blackBerry || isNullOrTrue(f.mobileOs.blackBerry[0])) &&
+            (!this.props.answers.windowsPhone || isNullOrTrue(f.mobileOs.windows[0])) &&
             this.canBeDevelopedOnSelectedDesktop(f) &&
-            (!this.state.iOSnonMac || isNullOrTrue(f.desktopOs.iOSnonMac[0])) &&
-            (!this.state.winNonWin || isNullOrTrue(f.desktopOs.winNonWin[0])) &&
-            (this.satisfiesPriceLimit(f, this.state.size, this.state.price))
+            (!this.props.answers.iOSnonMac || isNullOrTrue(f.desktopOs.iOSnonMac[0])) &&
+            (!this.props.answers.winNonWin || isNullOrTrue(f.desktopOs.winNonWin[0])) &&
+            (this.satisfiesPriceLimit(f, this.props.answers.size, this.props.answers.price))
         );
     }
 
     renderiOSnonMac() {
-        if (this.state.ios && !this.state.macOs) {
+        if (this.props.answers.ios && !this.props.answers.macOs) {
             return (
                 <Question
                     question="Do you require iOS builds on non-Mac devices?"
@@ -132,20 +113,20 @@ class S1 extends Component {
                     <input type="radio"
                            name="iOSnonMac"
                            value="Yes"
-                           checked={this.state.iOSnonMac}
-                           onChange={() => this.setState({iOSnonMac: true})}/>Yes<br />
+                           checked={this.props.answers.iOSnonMac}
+                           onChange={() => this.props.addAnswer(this.props.answers, {iOSnonMac: true})}/>Yes<br />
                     <input type="radio"
                            name="iOSnonMac"
                            value="No"
-                           checked={!this.state.iOSnonMac}
-                           onChange={() => this.setState({iOSnonMac: false})}/>No<br />
+                           checked={!this.props.answers.iOSnonMac}
+                           onChange={() => this.props.addAnswer(this.props.answers, {iOSnonMac: false})}/>No<br />
                 </Question>
             );
         }
     }
 
     renderWinNonWin() {
-        if (this.state.windowsPhone && !this.state.windows) {
+        if (this.props.answers.windowsPhone && !this.props.answers.windows) {
             return (
                 <Question
                     question="Do you require Windows builds on non-Windows desktop devices?"
@@ -157,13 +138,13 @@ class S1 extends Component {
                     <input type="radio"
                            name="winNonWin"
                            value="Yes"
-                           checked={this.state.winNonWin}
-                           onChange={() => this.setState({winNonWin: true})}/>Yes<br />
+                           checked={this.props.answers.winNonWin}
+                           onChange={() => this.props.addAnswer(this.props.answers, {winNonWin: true})}/>Yes<br />
                     <input type="radio"
                            name="winNonWin"
                            value="No"
-                           checked={!this.state.winNonWin}
-                           onChange={() => this.setState({winNonWin: false})}/>No<br />
+                           checked={!this.props.answers.winNonWin}
+                           onChange={() => this.props.addAnswer(this.props.answers, {winNonWin: false})}/>No<br />
                 </Question>
             );
         }
@@ -171,7 +152,7 @@ class S1 extends Component {
 
     render() {
         const filteredFrameworks = this.getSuitableFrameworks();
-        //console.log('S1', filteredFrameworks.map(f => f.name), this.state, filteredFrameworks);
+        //console.log('S1', filteredFrameworks.map(f => f.name), this.props.answers, filteredFrameworks);
 
         return (
             <div>
@@ -184,21 +165,21 @@ class S1 extends Component {
                         for Android and iOS. Development for Windows 10 is also supported by vast majority of tools, or
                         planned, at least. However, development for BlackBerry is getting still more rare.">
                     <input type="checkbox"
-                           checked={this.state.android}
-                           onClick={() => this.setState({android: !this.state.android})}/>
+                           checked={this.props.answers.android}
+                           onClick={() => this.props.addAnswer(this.props.answers, {android: !this.props.answers.android})}/>
                     Android<br />
                     <input type="checkbox"
-                           checked={this.state.blackBerry}
-                           onClick={() => this.setState({blackBerry: !this.state.blackBerry})}/>
+                           checked={this.props.answers.blackBerry}
+                           onClick={() => this.props.addAnswer(this.props.answers, {blackBerry: !this.props.answers.blackBerry})}/>
                     BlackBerry<br/>
                     <input type="checkbox"
-                           checked={this.state.ios}
-                           onClick={() => this.setState({ios: !this.state.ios, iOSnonMac: false})}/>
+                           checked={this.props.answers.ios}
+                           onClick={() => this.props.addAnswer(this.props.answers, {ios: !this.props.answers.ios, iOSnonMac: false})}/>
                     iOS<br/>
                     <input type="checkbox"
-                           checked={this.state.windowsPhone}
-                           onClick={() => this.setState({
-                               windowsPhone: !this.state.windowsPhone,
+                           checked={this.props.answers.windowsPhone}
+                           onClick={() => this.props.addAnswer(this.props.answers, {
+                               windowsPhone: !this.props.answers.windowsPhone,
                                winNonWin: false
                            })}/>
                     Windows<br/>
@@ -211,20 +192,20 @@ class S1 extends Component {
                         available only online). There are a few exceptions that have very strict limitations, e.g.
                         RubyMotion can be installed and developed only on a Mac.">
                     <input type="checkbox"
-                           checked={this.state.linux}
-                           onClick={() => this.setState({linux: !this.state.linux})}/>
+                           checked={this.props.answers.linux}
+                           onClick={() => this.props.addAnswer(this.props.answers, {linux: !this.props.answers.linux})}/>
                     Linux<br />
                     <input type="checkbox"
-                           checked={this.state.macOs}
-                           onClick={() => this.setState({macOs: !this.state.macOs, iOSnonMac: false})}/>
+                           checked={this.props.answers.macOs}
+                           onClick={() => this.props.addAnswer(this.props.answers, {macOs: !this.props.answers.macOs, iOSnonMac: false})}/>
                     macOS<br/>
                     <input type="checkbox"
-                           checked={this.state.windows}
-                           onClick={() => this.setState({windows: !this.state.windows, winNonWin: false})}/>
+                           checked={this.props.answers.windows}
+                           onClick={() => this.props.addAnswer(this.props.answers, {windows: !this.props.answers.windows, winNonWin: false})}/>
                     Windows<br/>
                     <input type="checkbox"
-                           checked={this.state.web}
-                           onClick={() => this.setState({web: !this.state.web})}/>
+                           checked={this.props.answers.web}
+                           onClick={() => this.props.addAnswer(this.props.answers, {web: !this.props.answers.web})}/>
                     Web environment<br/>
                 </Question>
 
@@ -245,41 +226,41 @@ class S1 extends Component {
                     <input type="radio"
                            name="size"
                            value="Indie"
-                           checked={this.state.size === 1}
-                           onChange={() => this.setState({size: 1})}/>I am an indie developer<br />
+                           checked={this.props.answers.size === 1}
+                           onChange={() => this.props.addAnswer(this.props.answers, {size: 1})}/>I am an indie developer<br />
                     <input type="radio"
                            name="size"
                            value="Small"
-                           checked={this.state.size === 5}
-                           onChange={() => this.setState({size: 5})}/>Up to 5 developers<br />
+                           checked={this.props.answers.size === 5}
+                           onChange={() => this.props.addAnswer(this.props.answers, {size: 5})}/>Up to 5 developers<br />
                     <input type="radio"
                            name="size"
                            value="Medium"
-                           checked={this.state.size === 10}
-                           onChange={() => this.setState({size: 10})}/>Up to 10 developers<br />
+                           checked={this.props.answers.size === 10}
+                           onChange={() => this.props.addAnswer(this.props.answers, {size: 10})}/>Up to 10 developers<br />
                     <input type="radio"
                            name="size"
                            value="Large"
-                           checked={this.state.size === 25}
-                           onChange={() => this.setState({size: 25})}/>Up to 25 developers<br />
+                           checked={this.props.answers.size === 25}
+                           onChange={() => this.props.addAnswer(this.props.answers, {size: 25})}/>Up to 25 developers<br />
                     <input type="radio"
                            name="size"
                            value="XL"
-                           checked={this.state.size === 50}
-                           onChange={() => this.setState({size: 50})}/>More than 25 developers and I want
+                           checked={this.props.answers.size === 50}
+                           onChange={() => this.props.addAnswer(this.props.answers, {size: 50})}/>More than 25 developers and I want
                     partial enterprise support<br />
                     <input type="radio"
                            name="size"
                            value="XXL"
-                           checked={this.state.size === 100}
-                           onChange={() => this.setState({size: 100})}/>More than 25 developers and I want full
+                           checked={this.props.answers.size === 100}
+                           onChange={() => this.props.addAnswer(this.props.answers, {size: 100})}/>More than 25 developers and I want full
                     enterprise support<br />
 
                     I am willing to pay at most $
                     <input type="number"
-                           value={this.state.price}
+                           value={this.props.answers.price}
                            min="0"
-                           onChange={event => this.setState({price: event.target.value})}/>
+                           onChange={event => this.props.addAnswer(this.props.answers, {price: event.target.value})}/>
                     per year per developer.
                 </Question>
 
@@ -303,8 +284,12 @@ class S1 extends Component {
 function mapStateToProps(state) {
     return {
         allFrameworks: state.allFrameworks,
+        answers: state.answers,
         currentStep: state.currentStep
     }
 }
 
-export default connect(mapStateToProps, { nextStep: nextStep, addScore: addScore })(S1);
+export default connect(mapStateToProps, {
+    nextStep: nextStep,
+    addScore: addScore,
+    addAnswer: addAnswer})(S1);

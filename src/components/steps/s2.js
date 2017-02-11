@@ -1,30 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, addScore} from '../../actions/index';
+import {nextStep, addScore, addAnswer} from '../../actions/index';
 import {isNullOrTrue, evaluatePoints} from './utils';
 import Question from '../question';
 
 class S2 extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            nativeLook: false,
-            singleUi: true,
-            multithreading: false,
-            camera: false,
-            microphone: false,
-            video: false,
-            audio: false,
-            gps: false,
-            accelerometer: false,
-            gyro: false,
-            deviceState: false
-        };
-
-        //console.log('S2 ctor', props.filteredFrameworks);
-    }
-
     componentDidMount() {
         window.scrollTo(0, 0)
     }
@@ -32,31 +12,31 @@ class S2 extends Component {
     getScoreArray(frameworks){
         const scoreArray = frameworks.map(f => {
             let points = 0;
-            if(this.state.multithreading){
+            if(this.props.answers.multithreading){
                 points += evaluatePoints(f.multithreading[0], 7);
             }
-            if(this.state.camera){
+            if(this.props.answers.camera){
                 points += evaluatePoints(f.sensors.camera[0], 7);
             }
-            if(this.state.microphone){
+            if(this.props.answers.microphone){
                 points += evaluatePoints(f.sensors.microphone[0], 7);
             }
-            if(this.state.video){
+            if(this.props.answers.video){
                 points += evaluatePoints(f.apis.video[0], 7);
             }
-            if(this.state.audio){
+            if(this.props.answers.audio){
                 points += evaluatePoints(f.apis.audio[0], 7);
             }
-            if(this.state.gps){
+            if(this.props.answers.gps){
                 points += evaluatePoints(f.sensors.geolocation[0], 7);
             }
-            if(this.state.accelerometer){
+            if(this.props.answers.accelerometer){
                 points += evaluatePoints(f.sensors.accelerometer[0], 7);
             }
-            if(this.state.gyro){
+            if(this.props.answers.gyro){
                 points += evaluatePoints(f.sensors.gyroscope[0], 7);
             }
-            if(this.state.deviceState){
+            if(this.props.answers.deviceState){
                 points += evaluatePoints(f.apis.deviceStatus[0], 7);
             }
 
@@ -68,24 +48,24 @@ class S2 extends Component {
 
     getSuitableFrameworks() {
         return this.props.scoredFrameworks.filter(f =>
-            (this.state.nativeLook ? isNullOrTrue(f.ui.nativeLook[0]) : !isNullOrTrue(f.ui.nativeLook[0])) &&
-            (this.state.singleUi ?
+            (this.props.answers.nativeLook ? isNullOrTrue(f.ui.nativeLook[0]) : !isNullOrTrue(f.ui.nativeLook[0])) &&
+            (this.props.answers.singleUi ?
                 f.ui.uiLayers.some(ui => ui === "Single") :
                 f.ui.uiLayers.some(ui => ui === "Custom")) &&
-            (!this.state.multithreading || isNullOrTrue(f.multithreading[0])) &&
-            (!this.state.camera || isNullOrTrue(f.sensors.camera[0])) &&
-            (!this.state.microphone || isNullOrTrue(f.sensors.microphone[0])) &&
-            (!this.state.video || isNullOrTrue(f.apis.video[0])) &&
-            (!this.state.audio || isNullOrTrue(f.apis.audio[0])) &&
-            (!this.state.gps || isNullOrTrue(f.sensors.geolocation[0])) &&
-            (!this.state.accelerometer || isNullOrTrue(f.sensors.accelerometer[0])) &&
-            (!this.state.gyro || isNullOrTrue(f.sensors.gyroscope[0])) &&
-            (!this.state.deviceState || isNullOrTrue(f.apis.deviceStatus[0]))
+            (!this.props.answers.multithreading || isNullOrTrue(f.multithreading[0])) &&
+            (!this.props.answers.camera || isNullOrTrue(f.sensors.camera[0])) &&
+            (!this.props.answers.microphone || isNullOrTrue(f.sensors.microphone[0])) &&
+            (!this.props.answers.video || isNullOrTrue(f.apis.video[0])) &&
+            (!this.props.answers.audio || isNullOrTrue(f.apis.audio[0])) &&
+            (!this.props.answers.gps || isNullOrTrue(f.sensors.geolocation[0])) &&
+            (!this.props.answers.accelerometer || isNullOrTrue(f.sensors.accelerometer[0])) &&
+            (!this.props.answers.gyro || isNullOrTrue(f.sensors.gyroscope[0])) &&
+            (!this.props.answers.deviceState || isNullOrTrue(f.apis.deviceStatus[0]))
         );
     }
 
     renderSingleUiLayer() {
-        if (this.state.nativeLook) {
+        if (this.props.answers.nativeLook) {
             return (
                 <Question
                     question="Do you want to code a single UI layer for all operating systems, or a custom layer for each
@@ -101,14 +81,14 @@ class S2 extends Component {
                     <input type="radio"
                            name="singleUi"
                            value="Single"
-                           checked={this.state.singleUi}
-                           onChange={() => this.setState({singleUi: true})}/>
+                           checked={this.props.answers.singleUi}
+                           onChange={() => this.props.addAnswer(this.props.answers, {singleUi: true})}/>
                     Single UI layer<br />
                     <input type="radio"
                            name="singleUi"
                            value="Custom"
-                           checked={!this.state.singleUi}
-                           onChange={() => this.setState({singleUi: false})}/>
+                           checked={!this.props.answers.singleUi}
+                           onChange={() => this.props.addAnswer(this.props.answers, {singleUi: false})}/>
                     Custom UI layer for each mobile OS<br />
                 </Question>
             );
@@ -117,7 +97,7 @@ class S2 extends Component {
 
     render() {
         const filteredFrameworks = this.getSuitableFrameworks();
-        //console.log('S2', filteredFrameworks.map(f => f.name), this.state, filteredFrameworks, this.props.filteredFrameworks);
+        //console.log('S2', filteredFrameworks.map(f => f.name), this.props.answers, filteredFrameworks, this.props.filteredFrameworks);
 
         return (
             <div>
@@ -136,14 +116,14 @@ class S2 extends Component {
                     <input type="radio"
                            name="lookAndFeel"
                            value="Same"
-                           checked={!this.state.nativeLook}
-                           onChange={() => this.setState({nativeLook: false, singleUi: true})}/>
+                           checked={!this.props.answers.nativeLook}
+                           onChange={() => this.props.addAnswer(this.props.answers, {nativeLook: false, singleUi: true})}/>
                     Same across all operating systems<br />
                     <input type="radio"
                            name="lookAndFeel"
                            value="Native"
-                           checked={this.state.nativeLook}
-                           onChange={() => this.setState({nativeLook: true})}/>Native look and feel<br />
+                           checked={this.props.answers.nativeLook}
+                           onChange={() => this.props.addAnswer(this.props.answers, {nativeLook: true})}/>Native look and feel<br />
                 </Question>
 
                 {this.renderSingleUiLayer()}
@@ -162,13 +142,13 @@ class S2 extends Component {
                     <input type="radio"
                            name="multithreading"
                            value="Yes"
-                           checked={this.state.multithreading}
-                           onChange={() => this.setState({multithreading: true})}/>Yes<br />
+                           checked={this.props.answers.multithreading}
+                           onChange={() => this.props.addAnswer(this.props.answers, {multithreading: true})}/>Yes<br />
                     <input type="radio"
                            name="multithreading"
                            value="No"
-                           checked={!this.state.multithreading}
-                           onChange={() => this.setState({multithreading: false})}/>No<br />
+                           checked={!this.props.answers.multithreading}
+                           onChange={() => this.props.addAnswer(this.props.answers, {multithreading: false})}/>No<br />
                 </Question>
 
                 <Question
@@ -181,20 +161,20 @@ class S2 extends Component {
                         absent in Instant Developer, and a 3rd party library is needed for NativeScript and React
                         Native.">
                     <input type="checkbox"
-                           checked={this.state.camera}
-                           onClick={() => this.setState({camera: !this.state.camera})}/>
+                           checked={this.props.answers.camera}
+                           onClick={() => this.props.addAnswer(this.props.answers, {camera: !this.props.answers.camera})}/>
                     Camera<br />
                     <input type="checkbox"
-                           checked={this.state.microphone}
-                           onClick={() => this.setState({microphone: !this.state.microphone})}/>
+                           checked={this.props.answers.microphone}
+                           onClick={() => this.props.addAnswer(this.props.answers, {microphone: !this.props.answers.microphone})}/>
                     Microphone<br/>
                     <input type="checkbox"
-                           checked={this.state.video}
-                           onClick={() => this.setState({video: !this.state.video})}/>
+                           checked={this.props.answers.video}
+                           onClick={() => this.props.addAnswer(this.props.answers, {video: !this.props.answers.video})}/>
                     Play video<br/>
                     <input type="checkbox"
-                           checked={this.state.audio}
-                           onClick={() => this.setState({audio: !this.state.audio})}/>
+                           checked={this.props.answers.audio}
+                           onClick={() => this.props.addAnswer(this.props.answers, {audio: !this.props.answers.audio})}/>
                     Play audio<br/>
                 </Question>
 
@@ -205,16 +185,16 @@ class S2 extends Component {
                         Kivy and Smartface. However, using accelerometer or gyroscope needs a 3rd party library or
                         custom implementation in Kivy, NativeScript, React Native and Smartface.">
                     <input type="checkbox"
-                           checked={this.state.gps}
-                           onClick={() => this.setState({gps: !this.state.gps})}/>
+                           checked={this.props.answers.gps}
+                           onClick={() => this.props.addAnswer(this.props.answers, {gps: !this.props.answers.gps})}/>
                     Geolocation<br />
                     <input type="checkbox"
-                           checked={this.state.accelerometer}
-                           onClick={() => this.setState({accelerometer: !this.state.accelerometer})}/>
+                           checked={this.props.answers.accelerometer}
+                           onClick={() => this.props.addAnswer(this.props.answers, {accelerometer: !this.props.answers.accelerometer})}/>
                     Accelerometer<br/>
                     <input type="checkbox"
-                           checked={this.state.gyro}
-                           onClick={() => this.setState({gyro: !this.state.gyro})}/>
+                           checked={this.props.answers.gyro}
+                           onClick={() => this.props.addAnswer(this.props.answers, {gyro: !this.props.answers.gyro})}/>
                     Gyroscope<br/>
                 </Question>
 
@@ -228,13 +208,13 @@ class S2 extends Component {
                     <input type="radio"
                            name="deviceState"
                            value="Yes"
-                           checked={this.state.deviceState}
-                           onChange={() => this.setState({deviceState: true})}/>Yes<br />
+                           checked={this.props.answers.deviceState}
+                           onChange={() => this.props.addAnswer(this.props.answers, {deviceState: true})}/>Yes<br />
                     <input type="radio"
                            name="deviceState"
                            value="No"
-                           checked={!this.state.deviceState}
-                           onChange={() => this.setState({deviceState: false})}/>No<br />
+                           checked={!this.props.answers.deviceState}
+                           onChange={() => this.props.addAnswer(this.props.answers, {deviceState: false})}/>No<br />
                 </Question>
 
                 <div>
@@ -257,8 +237,12 @@ class S2 extends Component {
 function mapStateToProps(state) {
     return {
         scoredFrameworks: state.scoredFrameworks,
-        currentStep: state.currentStep
+        currentStep: state.currentStep,
+        answers: state.answers
     }
 }
 
-export default connect(mapStateToProps, {nextStep: nextStep, addScore: addScore})(S2);
+export default connect(mapStateToProps, {
+    nextStep: nextStep,
+    addScore: addScore,
+    addAnswer: addAnswer})(S2);
