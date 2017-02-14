@@ -431,7 +431,7 @@ export const FrameworksArray = [
         },
         ui: {
             designer: [true],
-            nativeLook: [null, "Partially."],
+            nativeLook: [false],
             tabletLayout: [false],
             uiLayers: [single],
         }
@@ -671,7 +671,7 @@ export const FrameworksArray = [
         },
         ui: {
             designer: [true],
-            nativeLook: [true],
+            nativeLook: [false],
             tabletLayout: [false],
             uiLayers: [single],
         }
@@ -822,8 +822,8 @@ export const FrameworksArray = [
         testing: {
             appMonitoring: [false],
             appProfiling: [null, "Possible only in code via custom libraries."],
-            ci: [false],
-            debugging: [true],
+            ci: [null, "Partially possible, depending on selected IDE."],
+            debugging: [null, "Partially possible, depending on selected IDE."],
             groupShipping: [null, defaultAppStores],
             multiTesting: [null, defaultMultiTesting],
             uiTest: [false],
@@ -982,8 +982,8 @@ export const FrameworksArray = [
         testing: {
             appMonitoring: [true, "Telerik Analytics"],
             appProfiling: [true],
-            ci: [true],
-            debugging: [true],
+            ci: [null, "Partially possible, depending on selected IDE."],
+            debugging: [null, "Partially possible, depending on selected IDE."],
             groupShipping: [true, hockeyApp],
             multiTesting: [true, "Telerik Test Studio"],
             uiTest: [true],
@@ -991,7 +991,7 @@ export const FrameworksArray = [
         },
         ui: {
             designer: [false],
-            nativeLook: [false],
+            nativeLook: [true],
             tabletLayout: [true],
             uiLayers: [single, custom],
         }
@@ -1071,7 +1071,7 @@ export const FrameworksArray = [
         },
         ui: {
             designer: [false],
-            nativeLook: [true],
+            nativeLook: [false],
             tabletLayout: [true],
             uiLayers: [single],
         }
@@ -1339,7 +1339,7 @@ export const FrameworksArray = [
         backgrounding: [null, custom3],
         databases: [sqlite, realm, couchbase, "RocksDB"],
         desktopOs: {
-            linux: [false],
+            linux: [true],
             macOs: [true],
             windows: [true],
             web: [false],
@@ -1382,10 +1382,10 @@ export const FrameworksArray = [
         testing: {
             appMonitoring: [null, crashlytics],
             appProfiling: [null, "Not yet fully supported."],
-            ci: [true],
-            debugging: [true],
+            ci: [null, "Partially possible, depending on selected IDE."],
+            debugging: [null, "Partially possible, depending on selected IDE."],
             groupShipping: [true, hockeyApp],
-            multiTesting: [true, defaultMultiTesting],
+            multiTesting: [null, defaultMultiTesting],
             uiTest: [true],
             unitTest: [true],
         },
@@ -1551,7 +1551,7 @@ export const FrameworksArray = [
         },
         ui: {
             designer: [true],
-            nativeLook: [true],
+            nativeLook: [false],
             tabletLayout: [false],
             uiLayers: [single],
         }
