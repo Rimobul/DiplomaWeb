@@ -1,30 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, addScore, addAnswer} from '../../actions/index';
+import {nextStep, addAnswer} from '../../actions/index';
 import Question from '../question';
-import {evaluatePoints} from './utils';
 
 class S10 extends Component {
     componentDidMount () {
         window.scrollTo(0, 0)
-    }
-
-    getScoreArray(){
-        const scoreArray = this.props.scoredFrameworks.map(f => {
-            let points = 0;
-            if(this.props.answers.multitest){
-                points += evaluatePoints(f.testing.multiTesting[0], 1);
-            }
-            if(this.props.answers.ci){
-                points += evaluatePoints(f.testing.ci[0], 1);
-            }
-            if(this.props.answers.closedGroups){
-                points += evaluatePoints(f.testing.groupShipping[0], 1);
-            }
-            return {name: f.name, points: points};
-        });
-
-        return scoreArray;
     }
 
     render(){
@@ -94,7 +75,6 @@ class S10 extends Component {
                     <button
                         className="btn btn-success"
                         onClick={() => {
-                            this.props.addScore(this.props.scoredFrameworks, this.getScoreArray());
                             this.props.nextStep(this.props.currentStep)
                         }}>
                         Continue
@@ -109,12 +89,10 @@ class S10 extends Component {
 function mapStateToProps(state) {
     return {
         currentStep: state.currentStep,
-        scoredFrameworks: state.scoredFrameworks,
         answers: state.answers
     }
 }
 
 export default connect(mapStateToProps, {
     nextStep: nextStep,
-    addScore: addScore,
     addAnswer: addAnswer})(S10);

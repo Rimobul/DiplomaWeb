@@ -1,66 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, addScore, addAnswer} from '../../actions/index';
-import {evaluatePoints, isNullOrTrue} from './utils';
+import {nextStep, addAnswer} from '../../actions/index';
 import Question from '../question';
 
 class S9 extends Component {
     componentDidMount () {
         window.scrollTo(0, 0)
-    }
-
-    getScoreArray(){
-        const scoreArray = this.props.scoredFrameworks.map(f => {
-            let points = 0;
-            if(this.props.answers.angular){
-                points += evaluatePoints(f.languages.some(l => l === "Angular"), 1);
-            }
-            if(this.props.answers.basic){
-                points += evaluatePoints(f.languages.some(l => l === "BASIC"), 1);
-            }
-            if(this.props.answers.cpp){
-                points += evaluatePoints(f.languages.some(l => l === "C++"), 1);
-            }
-            if(this.props.answers.csharp){
-                points += evaluatePoints(f.languages.some(l => l === "C#"), 1);
-            }
-            if(this.props.answers.delphi){
-                points += evaluatePoints(f.languages.some(l => l === "Delphi"), 1);
-            }
-            if(this.props.answers.js){
-                points += evaluatePoints(f.languages.some(l => l === "JavaScript"), 1);
-            }
-            if(this.props.answers.java){
-                points += evaluatePoints(f.languages.some(l => l === "Java"), 1);
-            }
-            if(this.props.answers.lua){
-                points += evaluatePoints(f.languages.some(l => l === "Lua"), 1);
-            }
-            if(this.props.answers.python){
-                points += evaluatePoints(f.languages.some(l => l === "Python"), 1);
-            }
-            if(this.props.answers.react){
-                points += evaluatePoints(f.languages.some(l => l === "React"), 1);
-            }
-            if(this.props.answers.ruby){
-                points += evaluatePoints(f.languages.some(l => l === "Ruby"), 1);
-            }
-            if(this.props.answers.codefree){
-                points += evaluatePoints(f.languages.some(l => l === "Code-free"), 1);
-            }
-            if(this.props.answers.mbaas){
-                points += evaluatePoints(f.mbaas[0], 1);
-            }
-            if(this.props.answers.browser){
-                points += evaluatePoints(f.apis.embeddedBrowser[0], 1);
-            }
-            if(this.props.answers.call){
-                points += evaluatePoints(isNullOrTrue(f.apis.addressBook[0]) && isNullOrTrue(f.apis.callSms[0]), 1);
-            }
-            return {name: f.name, points: points};
-        });
-
-        return scoreArray;
     }
 
     render(){
@@ -184,7 +129,6 @@ class S9 extends Component {
                     <button
                         className="btn btn-success"
                         onClick={() => {
-                            this.props.addScore(this.props.scoredFrameworks, this.getScoreArray());
                             this.props.nextStep(this.props.currentStep)
                         }}>
                         Continue
@@ -199,12 +143,10 @@ class S9 extends Component {
 function mapStateToProps(state) {
     return {
         currentStep: state.currentStep,
-        scoredFrameworks: state.scoredFrameworks,
         answers: state.answers
     }
 }
 
 export default connect(mapStateToProps, {
     nextStep: nextStep,
-    addScore: addScore,
     addAnswer: addAnswer})(S9);

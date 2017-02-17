@@ -1,30 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, addScore, addAnswer} from '../../actions/index';
+import {nextStep, addAnswer, getScore} from '../../actions/index';
 import Question from '../question';
-import {evaluatePoints} from './utils';
 
 class S11 extends Component {
     componentDidMount () {
         window.scrollTo(0, 0)
-    }
-
-    getScoreArray(){
-        const scoreArray = this.props.scoredFrameworks.map(f => {
-            let points = 0;
-            if(this.props.answers.openGl){
-                points += evaluatePoints(f.openGl[0], 1);
-            }
-            if(this.props.answers.games){
-                points += evaluatePoints(f.games[0], 1);
-            }
-            if(this.props.answers.avr){
-                points += evaluatePoints(f.augmentedVirtual[0], 1);
-            }
-            return {name: f.name, points: points};
-        });
-
-        return scoreArray;
     }
 
     render(){
@@ -87,8 +68,8 @@ class S11 extends Component {
                     <button
                         className="btn btn-success"
                         onClick={() => {
-                            this.props.addScore(this.props.scoredFrameworks, this.getScoreArray());
-                            this.props.nextStep(this.props.currentStep)
+                            this.props.getScore(this.props.allFrameworks, this.props.answers);
+                            this.props.nextStep(this.props.currentStep);
                         }}>
                         Continue
                         <span className="glyphicon glyphicon-play"/>
@@ -102,12 +83,12 @@ class S11 extends Component {
 function mapStateToProps(state) {
     return {
         currentStep: state.currentStep,
-        scoredFrameworks: state.scoredFrameworks,
+        allFrameworks: state.allFrameworks,
         answers: state.answers
     }
 }
 
 export default connect(mapStateToProps, {
     nextStep: nextStep,
-    addScore: addScore,
-    addAnswer: addAnswer})(S11);
+    addAnswer: addAnswer,
+    getScore: getScore})(S11);

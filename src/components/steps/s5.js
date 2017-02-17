@@ -1,32 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, addScore, addAnswer} from '../../actions/index';
-import {evaluatePoints, isMoreOrEqual} from './utils';
+import {nextStep, addAnswer} from '../../actions/index';
 import Question from '../question';
 
 class S5 extends Component {
     componentDidMount () {
         window.scrollTo(0, 0)
-    }
-
-    getScoreArray(){
-        const scoreArray = this.props.scoredFrameworks.map(f => {
-            let points = 0;
-
-            points += isMoreOrEqual(this.props.answers.complex, f.performance, 5);
-            if(this.props.answers.designer){
-                points += evaluatePoints(f.ui.designer[0], 5);
-            }
-            if(this.props.answers.tablet){
-                points += evaluatePoints(f.ui.tabletLayout[0], 5);
-            }
-            if(this.props.answers.osOverrides){
-                points += evaluatePoints(f.osOverrides[0], 5);
-            }
-            return {name: f.name, points: points};
-        });
-
-        return scoreArray;
     }
 
     render() {
@@ -118,7 +97,6 @@ class S5 extends Component {
                     <button
                         className="btn btn-success"
                         onClick={() => {
-                            this.props.addScore(this.props.scoredFrameworks, this.getScoreArray());
                             this.props.nextStep(this.props.currentStep)
                         }}>
                         Continue
@@ -132,7 +110,6 @@ class S5 extends Component {
 
 function mapStateToProps(state) {
     return {
-        scoredFrameworks: state.scoredFrameworks,
         currentStep: state.currentStep,
         answers: state.answers
     }
@@ -140,5 +117,4 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
     nextStep: nextStep,
-    addScore: addScore,
     addAnswer: addAnswer})(S5);
