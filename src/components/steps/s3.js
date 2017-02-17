@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, addScore, addAnswer} from '../../actions/index';
-import {isNullOrTrue, evaluatePoints} from './utils';
+import {nextStep, addAnswer, getScore} from '../../actions/index';
 import Question from '../question';
 
 class S3 extends Component {
@@ -9,44 +8,9 @@ class S3 extends Component {
         window.scrollTo(0, 0)
     }
 
-    getScoreArray(frameworks){
-        const scoreArray = frameworks.map(f => {
-            let points = 0;
-            if(this.props.answers.background){
-                points += evaluatePoints(f.backgrounding[0], 7);
-            }
-            if(this.props.answers.push){
-                points += evaluatePoints(f.apis.pushNotifications[0], 7);
-            }
-            if(this.props.answers.invokeNative){
-                points += evaluatePoints(f.invokeNative[0], 7);
-            }
-            if(this.props.answers.crash){
-                points += evaluatePoints(f.testing.appMonitoring[0], 7);
-            }
-            return {name: f.name, points: points};
-        });
-
-        return scoreArray;
-    }
-
-    getSuitableFrameworks() {
-        return this.props.scoredFrameworks.filter(f =>
-            (!this.props.answers.background || isNullOrTrue(f.backgrounding[0])) &&
-            (!this.props.answers.push || isNullOrTrue(f.apis.pushNotifications[0])) &&
-            (!this.props.answers.invokeNative || isNullOrTrue(f.invokeNative[0])) &&
-            (!this.props.answers.crash || isNullOrTrue(f.testing.appMonitoring[0]))
-        );
-    }
-
     render() {
-        const filteredFrameworks = this.getSuitableFrameworks();
-        //console.log('S2', filteredFrameworks.map(f => f.name), this.state, filteredFrameworks, this.props.filteredFrameworks);
-
         return (
             <div>
-                {filteredFrameworks.length} frameworks satisfy your requirements.
-
                 <Question
                     question="Do you want to use a background process?"
                     note="Some applications might find it useful to have a permanent background service with no interface.
@@ -148,8 +112,7 @@ class S3 extends Component {
                     <button
                         className="btn btn-success"
                         onClick={() => {
-                            const filteredFrameworks = this.getSuitableFrameworks();
-                            this.props.addScore(filteredFrameworks, this.getScoreArray(filteredFrameworks));
+                            this.props.getScore(this.props.allFrameworks, this.props.answers)
                             this.props.nextStep(this.props.currentStep)
                         }}>
                         Continue
@@ -163,7 +126,7 @@ class S3 extends Component {
 
 function mapStateToProps(state) {
     return {
-        scoredFrameworks: state.scoredFrameworks,
+        allFrameworks: state.allFrameworks,
         answers: state.answers,
         currentStep: state.currentStep
     }
@@ -171,5 +134,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
     nextStep: nextStep,
-    addScore: addScore,
-    addAnswer: addAnswer})(S3);
+    addAnswer: addAnswer,
+    getScore: getScore})(S3);

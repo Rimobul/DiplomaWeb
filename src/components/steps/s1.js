@@ -1,101 +1,11 @@
 import React, {Component} from 'react';
-import {isNullOrTrue, evaluatePoints} from './utils';
 import {connect} from 'react-redux';
-import {nextStep, addScore, addAnswer} from '../../actions/index';
+import {nextStep, addAnswer} from '../../actions/index';
 import Question from '../question';
 
 class S1 extends Component {
     componentDidMount() {
         window.scrollTo(0, 0)
-    }
-
-    getScoreArray(frameworks){
-        const scoreArray = frameworks.map(f => {
-            let points = 0;
-            if(this.props.answers.android){
-                points += evaluatePoints(f.mobileOs.android[0], 7);
-            }
-            if(this.props.answers.ios){
-                points += evaluatePoints(f.mobileOs.ios[0], 7);
-            }
-            if(this.props.answers.windowsPhone){
-                points += evaluatePoints(f.mobileOs.windows[0], 7);
-            }
-            if(this.props.answers.blackBerry){
-                points += evaluatePoints(f.mobileOs.blackBerry[0], 7);
-            }
-            if(this.props.answers.linux){
-                points += evaluatePoints(f.desktopOs.linux[0], 7);
-            }
-            if(this.props.answers.macOs){
-                points += evaluatePoints(f.desktopOs.macOs[0], 7);
-            }
-            if(this.props.answers.windows){
-                points += evaluatePoints(f.desktopOs.windows[0], 7);
-            }
-            if(this.props.answers.web){
-                points += evaluatePoints(f.desktopOs.web[0], 7);
-            }
-            if(this.props.answers.iOSnonMac){
-                points += evaluatePoints(f.desktopOs.iOSnonMac[0], 7);
-            }
-            if(this.props.answers.winNonWin){
-                points += evaluatePoints(f.desktopOs.winNonWin[0], 7);
-            }
-            return {name: f.name, points: points};
-        });
-
-        return scoreArray;
-    }
-
-    satisfiesPriceLimit(framework, teamSize, priceLimit) {
-        let realPrice = 0;
-        switch (teamSize) {
-            case 1:
-                realPrice = framework.prices.indie;
-                break;
-            case 5:
-                realPrice = framework.prices.to5;
-                break;
-            case 10:
-                realPrice = framework.prices.to10;
-                break;
-            case 25:
-                realPrice = framework.prices.to25;
-                break;
-            case 50:
-                realPrice = framework.prices.enterpriseLow;
-                break;
-            case 100:
-                realPrice = framework.prices.enterpriseHigh;
-                break;
-        }
-
-        if (realPrice == null) {
-            return true;
-        } else {
-            return realPrice <= priceLimit;
-        }
-    }
-
-    canBeDevelopedOnSelectedDesktop(framework) {
-        return (this.props.answers.linux && isNullOrTrue(framework.desktopOs.linux[0])) ||
-            (this.props.answers.macOs && isNullOrTrue(framework.desktopOs.macOs[0])) ||
-            (this.props.answers.windows && isNullOrTrue(framework.desktopOs.windows[0])) ||
-            (this.props.answers.web && isNullOrTrue(framework.desktopOs.web[0]));
-    }
-
-    getSuitableFrameworks() {
-        return this.props.allFrameworks.filter(f =>
-            (!this.props.answers.android || isNullOrTrue(f.mobileOs.android[0])) &&
-            (!this.props.answers.ios || isNullOrTrue(f.mobileOs.ios[0])) &&
-            (!this.props.answers.blackBerry || isNullOrTrue(f.mobileOs.blackBerry[0])) &&
-            (!this.props.answers.windowsPhone || isNullOrTrue(f.mobileOs.windows[0])) &&
-            this.canBeDevelopedOnSelectedDesktop(f) &&
-            (!this.props.answers.iOSnonMac || isNullOrTrue(f.desktopOs.iOSnonMac[0])) &&
-            (!this.props.answers.winNonWin || isNullOrTrue(f.desktopOs.winNonWin[0])) &&
-            (this.satisfiesPriceLimit(f, this.props.answers.size, this.props.answers.price))
-        );
     }
 
     renderiOSnonMac() {
@@ -151,13 +61,8 @@ class S1 extends Component {
     }
 
     render() {
-        const filteredFrameworks = this.getSuitableFrameworks();
-        //console.log('S1', filteredFrameworks.map(f => f.name), this.props.answers, filteredFrameworks);
-
         return (
             <div>
-                {filteredFrameworks.length} frameworks satisfy your requirements.
-
                 <Question
                     question="Which mobile operating systems do you want to target?"
                     note="The obvious question is for which operating systems will the application be developed. All tools
@@ -268,8 +173,6 @@ class S1 extends Component {
                     <button
                         className="btn btn-success"
                         onClick={() => {
-                            const filteredFrameworks = this.getSuitableFrameworks();
-                            this.props.addScore(filteredFrameworks, this.getScoreArray(filteredFrameworks))
                             this.props.nextStep(this.props.currentStep)
                         }}>
                         Continue
@@ -291,5 +194,4 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
     nextStep: nextStep,
-    addScore: addScore,
     addAnswer: addAnswer})(S1);

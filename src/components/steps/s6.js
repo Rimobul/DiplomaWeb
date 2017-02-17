@@ -1,60 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, addScore, addAnswer} from '../../actions/index';
+import {nextStep, addAnswer} from '../../actions/index';
 import Question from '../question';
-import {evaluatePoints} from './utils';
 
 class S6 extends Component {
     componentDidMount () {
         window.scrollTo(0, 0)
-    }
-
-    getScoreArray(){
-        const scoreArray = this.props.scoredFrameworks.map(f => {
-            let points = 0;
-            if(this.props.answers.files){
-                points += evaluatePoints(f.apis.fileSystem[0], 5);
-            }
-            if(this.props.answers.couchbase){
-                points += evaluatePoints(f.databases.some(d => d === "Couchbase"), 5);
-            }
-            if(this.props.answers.realm){
-                points += evaluatePoints(f.databases.some(d => d === "Realm"), 5);
-            }
-            if(this.props.answers.sqlite){
-                points += evaluatePoints(f.databases.some(d => d === "SQLite"), 5);
-            }
-            if(this.props.answers.otherDb){
-                points += evaluatePoints(f.databases.some(d => d != "SQLite" && d != "Realm" && d != "Couchbase"), 5);
-            }
-            if(this.props.answers.bluetooth){
-                points += evaluatePoints(f.sensors.bluetooth[0], 5);
-            }
-            if(this.props.answers.nfc){
-                points += evaluatePoints(f.sensors.nfc[0], 5);
-            }
-            if(this.props.answers.fingerprint){
-                points += evaluatePoints(f.sensors.fingerprint[0], 5);
-            }
-            if(this.props.answers.barcode){
-                points += evaluatePoints(f.sensors.barcode[0], 5);
-            }
-            if(this.props.answers.alexa){
-                points += evaluatePoints(f.assistants.some(d => d === "Alexa"), 5);
-            }
-            if(this.props.answers.cortana){
-                points += evaluatePoints(f.assistants.some(d => d === "Cortana"), 5);
-            }
-            if(this.props.answers.now){
-                points += evaluatePoints(f.assistants.some(d => d === "GoogleAssistant"), 5);
-            }
-            if(this.props.answers.siri){
-                points += evaluatePoints(f.assistants.some(d => d === "Siri"), 5);
-            }
-            return {name: f.name, points: points};
-        });
-
-        return scoreArray;
     }
 
     render(){
@@ -160,7 +111,6 @@ class S6 extends Component {
                     <button
                         className="btn btn-success"
                         onClick={() => {
-                            this.props.addScore(this.props.scoredFrameworks, this.getScoreArray());
                             this.props.nextStep(this.props.currentStep)
                         }}>
                         Continue
@@ -175,12 +125,10 @@ class S6 extends Component {
 function mapStateToProps(state) {
     return {
         currentStep: state.currentStep,
-        scoredFrameworks: state.scoredFrameworks,
         answers: state.answers
     }
 }
 
 export default connect(mapStateToProps, {
     nextStep: nextStep,
-    addScore: addScore,
     addAnswer: addAnswer})(S6);

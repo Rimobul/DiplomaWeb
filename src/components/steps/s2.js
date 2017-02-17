@@ -1,67 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, addScore, addAnswer} from '../../actions/index';
-import {isNullOrTrue, evaluatePoints} from './utils';
+import {nextStep, addAnswer} from '../../actions/index';
 import Question from '../question';
 
 class S2 extends Component {
     componentDidMount() {
         window.scrollTo(0, 0)
-    }
-
-    getScoreArray(frameworks){
-        const scoreArray = frameworks.map(f => {
-            let points = 0;
-            if(this.props.answers.multithreading){
-                points += evaluatePoints(f.multithreading[0], 7);
-            }
-            if(this.props.answers.camera){
-                points += evaluatePoints(f.sensors.camera[0], 7);
-            }
-            if(this.props.answers.microphone){
-                points += evaluatePoints(f.sensors.microphone[0], 7);
-            }
-            if(this.props.answers.video){
-                points += evaluatePoints(f.apis.video[0], 7);
-            }
-            if(this.props.answers.audio){
-                points += evaluatePoints(f.apis.audio[0], 7);
-            }
-            if(this.props.answers.gps){
-                points += evaluatePoints(f.sensors.geolocation[0], 7);
-            }
-            if(this.props.answers.accelerometer){
-                points += evaluatePoints(f.sensors.accelerometer[0], 7);
-            }
-            if(this.props.answers.gyro){
-                points += evaluatePoints(f.sensors.gyroscope[0], 7);
-            }
-            if(this.props.answers.deviceState){
-                points += evaluatePoints(f.apis.deviceStatus[0], 7);
-            }
-
-            return {name: f.name, points: points};
-        });
-
-        return scoreArray;
-    }
-
-    getSuitableFrameworks() {
-        return this.props.scoredFrameworks.filter(f =>
-            (this.props.answers.nativeLook ? isNullOrTrue(f.ui.nativeLook[0]) : !isNullOrTrue(f.ui.nativeLook[0])) &&
-            (this.props.answers.singleUi ?
-                f.ui.uiLayers.some(ui => ui === "Single") :
-                f.ui.uiLayers.some(ui => ui === "Custom")) &&
-            (!this.props.answers.multithreading || isNullOrTrue(f.multithreading[0])) &&
-            (!this.props.answers.camera || isNullOrTrue(f.sensors.camera[0])) &&
-            (!this.props.answers.microphone || isNullOrTrue(f.sensors.microphone[0])) &&
-            (!this.props.answers.video || isNullOrTrue(f.apis.video[0])) &&
-            (!this.props.answers.audio || isNullOrTrue(f.apis.audio[0])) &&
-            (!this.props.answers.gps || isNullOrTrue(f.sensors.geolocation[0])) &&
-            (!this.props.answers.accelerometer || isNullOrTrue(f.sensors.accelerometer[0])) &&
-            (!this.props.answers.gyro || isNullOrTrue(f.sensors.gyroscope[0])) &&
-            (!this.props.answers.deviceState || isNullOrTrue(f.apis.deviceStatus[0]))
-        );
     }
 
     renderSingleUiLayer() {
@@ -96,13 +40,8 @@ class S2 extends Component {
     }
 
     render() {
-        const filteredFrameworks = this.getSuitableFrameworks();
-        //console.log('S2', filteredFrameworks.map(f => f.name), this.props.answers, filteredFrameworks, this.props.filteredFrameworks);
-
         return (
             <div>
-                {filteredFrameworks.length} frameworks satisfy your requirements.
-
                 <Question
                     question="Do you want the UI to look the same on all operating systems, or use the native look and feel?"
                     note="Even with a single shared UI code, the application may still look native on individual
@@ -221,8 +160,6 @@ class S2 extends Component {
                     <button
                         className="btn btn-success"
                         onClick={() => {
-                            const filteredFrameworks = this.getSuitableFrameworks();
-                            this.props.addScore(filteredFrameworks, this.getScoreArray(filteredFrameworks));
                             this.props.nextStep(this.props.currentStep)
                         }}>
                         Continue
@@ -236,7 +173,6 @@ class S2 extends Component {
 
 function mapStateToProps(state) {
     return {
-        scoredFrameworks: state.scoredFrameworks,
         currentStep: state.currentStep,
         answers: state.answers
     }
@@ -244,5 +180,4 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
     nextStep: nextStep,
-    addScore: addScore,
     addAnswer: addAnswer})(S2);

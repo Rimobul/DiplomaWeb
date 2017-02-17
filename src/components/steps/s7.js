@@ -1,35 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, addScore, addAnswer} from '../../actions/index';
-import {evaluatePoints} from './utils';
+import {nextStep, addAnswer, getScore} from '../../actions/index';
 import Question from '../question';
 
 class S7 extends Component {
     componentDidMount () {
         window.scrollTo(0, 0)
     }
-
-    getScoreArray(){
-        const scoreArray = this.props.scoredFrameworks.map(f => {
-            let points = 0;
-            if(this.props.answers.debug){
-                points += evaluatePoints(f.testing.debugging[0], 5);
-            }
-            if(this.props.answers.unit){
-                points += evaluatePoints(f.testing.unitTest[0], 5);
-            }
-            if(this.props.answers.uiTesting){
-                points += evaluatePoints(f.testing.uiTest[0], 5);
-            }
-            if(this.props.answers.profiling){
-                points += evaluatePoints(f.testing.appProfiling[0], 5);
-            }
-            return {name: f.name, points: points};
-        });
-
-        return scoreArray;
-    }
-
     render(){
         return(
             <div>
@@ -107,8 +84,8 @@ class S7 extends Component {
                     <button
                         className="btn btn-success"
                         onClick={() => {
-                            this.props.addScore(this.props.scoredFrameworks, this.getScoreArray());
-                            this.props.nextStep(this.props.currentStep)
+                            this.props.getScore(this.props.allFrameworks, this.props.answers);
+                            this.props.nextStep(this.props.currentStep);
                         }}>
                         Continue
                         <span className="glyphicon glyphicon-play"/>
@@ -122,12 +99,12 @@ class S7 extends Component {
 function mapStateToProps(state) {
     return {
         currentStep: state.currentStep,
-        scoredFrameworks: state.scoredFrameworks,
+        allFrameworks: state.allFrameworks,
         answers: state.answers
     }
 }
 
 export default connect(mapStateToProps, {
     nextStep: nextStep,
-    addScore: addScore,
-    addAnswer: addAnswer})(S7);
+    addAnswer: addAnswer,
+    getScore: getScore})(S7);
