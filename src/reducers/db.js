@@ -42,6 +42,7 @@ export const FrameworksArray = [
         image: "https://www.alphasoftware.com/blog/wp-content/uploads/2014/10/alpha-software-logo-2.png",
         score: 0,
         performance: 0,
+        popularity: 5,
         apis: {
             audio: [true],
             video: [true],
@@ -122,6 +123,7 @@ export const FrameworksArray = [
         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Appcelerator_logo.svg/440px-Appcelerator_logo.svg.png",
         score: 0,
         performance: 1,
+        popularity: 10,
         apis: {
             audio: [true],
             video: [true],
@@ -202,6 +204,7 @@ export const FrameworksArray = [
         image: "http://exadel.com/assets/ApperyIO/appery.io_logo_600x142.png",
         score: 0,
         performance: 0,
+        popularity: 6,
         apis: {
             audio: [true],
             video: [true],
@@ -282,6 +285,7 @@ export const FrameworksArray = [
         image: "https://p3.zdassets.com/hc/settings_assets/888596/200136495/ABxUb2iBNfC44zD791SifA-top_logo.png",
         score: 0,
         performance: 0,
+        popularity: 2,
         apis: {
             audio: [true],
             video: [true],
@@ -362,6 +366,7 @@ export const FrameworksArray = [
         image: "https://res.cloudinary.com/crunchbase-production/image/upload/v1397185054/3d6c475b1666918e17f4348756162dbd.png",
         score: 0,
         performance: 2,
+        popularity: 6,
         apis: {
             audio: [true],
             video: [true],
@@ -442,6 +447,7 @@ export const FrameworksArray = [
         image: "https://coronalabs.com/wp-content/uploads/2013/10/Flat_Corona_250x250.png",
         score: 0,
         performance: 1,
+        popularity: 8,
         apis: {
             audio: [true],
             video: [true],
@@ -522,6 +528,7 @@ export const FrameworksArray = [
         image: "http://www.openco.it/wp-content/uploads/2015/03/Embarcadero.jpg",
         score: 0,
         performance: 2,
+        popularity: 4,
         apis: {
             audio: [true],
             video: [true],
@@ -602,6 +609,7 @@ export const FrameworksArray = [
         image: "http://www.instantdeveloper.com/assets/logo-8e71db7111402e079a7f653c06362f53.png",
         score: 0,
         performance: 0,
+        popularity: 3,
         apis: {
             audio: [true],
             video: [false],
@@ -682,6 +690,7 @@ export const FrameworksArray = [
         image: "http://ecodile.com/wp-content/uploads/2015/10/ionic.png",
         score: 0,
         performance: 1,
+        popularity: 9,
         apis: {
             audio: [true],
             video: [true],
@@ -761,7 +770,8 @@ export const FrameworksArray = [
         web: "https://kivy.org/#home",
         image: "https://kivy.org/logos/kivy-logo-black-256.png",
         score: 0,
-        performance: 0,
+        performance: 1,
+        popularity: 6,
         apis: {
             audio: [null, custom3],
             video: [true],
@@ -842,6 +852,7 @@ export const FrameworksArray = [
         image: "https://res.cloudinary.com/crunchbase-production/image/upload/v1446047799/fiw2eossbkplsfyy3to1.png",
         score: 0,
         performance: 1,
+        popularity: 5,
         apis: {
             audio: [true],
             video: [true],
@@ -922,6 +933,7 @@ export const FrameworksArray = [
         image: "http://docs.nativescript.org/img/cli-getting-started/angular/chapter0/NativeScript_logo.png",
         score: 0,
         performance: 1,
+        popularity: 9,
         apis: {
             audio: [true],
             video: [null, custom3],
@@ -1001,7 +1013,8 @@ export const FrameworksArray = [
         web: "http://neomades.com/",
         image: "http://entreprendre.estia.fr/wp-content/uploads/2015/04/NEOMADES-374x210.jpg",
         score: 0,
-        performance: 1,
+        performance: 2,
+        popularity: 1,
         apis: {
             audio: [true],
             video: [true],
@@ -1082,6 +1095,7 @@ export const FrameworksArray = [
         image: "https://avatars1.githubusercontent.com/u/489708?v=3&s=460",
         score: 0,
         performance: 0,
+        popularity: 2,
         apis: {
             audio: [true],
             video: [true],
@@ -1162,6 +1176,7 @@ export const FrameworksArray = [
         image: "http://phonegap.com/uploads/artwork/PhoneGap-Symbol-Black.png",
         score: 0,
         performance: 0,
+        popularity: 10,
         apis: {
             audio: [true],
             video: [true],
@@ -1242,6 +1257,7 @@ export const FrameworksArray = [
         image: "https://upload.wikimedia.org/wikipedia/commons/d/d3/Qt_logo_2015.svg",
         score: 0,
         performance: 2,
+        popularity: 7,
         apis: {
             audio: [true],
             video: [true],
@@ -1322,6 +1338,7 @@ export const FrameworksArray = [
         image: "http://angular.github.io/react-native-renderer/assets/react.png",
         score: 0,
         performance: 1,
+        popularity: 10,
         apis: {
             audio: [true],
             video: [null, custom3],
@@ -1402,6 +1419,7 @@ export const FrameworksArray = [
         image: "http://i.imgur.com/mndCd.png",
         score: 0,
         performance: 2,
+        popularity: 7,
         apis: {
             audio: [true],
             video: [true],
@@ -1482,6 +1500,7 @@ export const FrameworksArray = [
         image: "https://res.cloudinary.com/crunchbase-production/image/upload/v1455916714/sxfpyihrzrdu7qy91dqi.png",
         score: 0,
         performance: 0,
+        popularity: 2,
         apis: {
             audio: [true],
             video: [true],
@@ -1562,6 +1581,7 @@ export const FrameworksArray = [
         image: "https://pbs.twimg.com/profile_images/556123940108505089/EgPXHGIi.png",
         score: 0,
         performance: 1,
+        popularity: 1,
         apis: {
             audio: [true],
             video: [true],
@@ -1642,6 +1662,7 @@ export const FrameworksArray = [
         image: "https://lh4.googleusercontent.com/-GRy7Ku-E_bM/UufXbdajfaI/AAAAAAAAAk4/4iOjrxMuiVc/profile.png",
         score: 0,
         performance: 0,
+        popularity: 8,
         apis: {
             audio: [true],
             video: [true],
@@ -1722,6 +1743,7 @@ export const FrameworksArray = [
         image: "https://marketplace.thingworx.com/-/media/Marketplace/Partner/ViziApps%20logo.png?h=121&la=en&w=400&hash=EB9CF2A869BB82FF71F5167003C1475575C931BB",
         score: 0,
         performance: 0,
+        popularity: 1,
         apis: {
             audio: [true],
             video: [true],
@@ -1802,6 +1824,7 @@ export const FrameworksArray = [
         image: "https://www.xamarin.com/content/images/pages/branding/assets/xamagon.png",
         score: 0,
         performance: 2,
+        popularity: 10,
         apis: {
             audio: [true],
             video: [true],
