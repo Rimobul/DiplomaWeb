@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, resetSteps} from '../../actions/index';
+import {nextStep, resetSteps, previousStep} from '../../actions/index';
 
 class S4 extends Component {
     componentDidMount () {
@@ -94,12 +94,20 @@ class S4 extends Component {
                         Download PDF
                     </button>
                     <button
+                        className="btn btn-info"
+                        onClick={() => {
+                            this.props.previousStep(this.props.currentStep)
+                        }}>
+                        Back
+                        <span className="glyphicon glyphicon-chevron-left"></span>
+                    </button>
+                    <button
                         className="btn btn-success"
                         onClick={() => {
                             this.props.nextStep(this.props.currentStep)
                         }}>
-                        Refine more
-                        <span className="glyphicon glyphicon-play"/>
+                        Next
+                        <span className="glyphicon glyphicon-chevron-right"></span>
                     </button>
                 </div>
             </div>
@@ -116,4 +124,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
     nextStep: nextStep,
+    previousStep: previousStep,
     resetSteps: resetSteps})(S4);

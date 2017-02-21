@@ -9,6 +9,13 @@ export function nextStep(currentStep) {
     };
 }
 
+export function previousStep(currentStep){
+    return {
+        type: CURRENT_STEP,
+        payload: currentStep - 1
+    };
+}
+
 export function resetSteps() {
     return {
         type: CURRENT_STEP,

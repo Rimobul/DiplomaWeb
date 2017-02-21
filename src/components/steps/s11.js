@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, addAnswer, getScore} from '../../actions/index';
+import {nextStep, addAnswer, getScore, previousStep} from '../../actions/index';
 import Question from '../question';
 
 class S11 extends Component {
@@ -66,13 +66,20 @@ class S11 extends Component {
 
                 <div>
                     <button
+                        className="btn btn-info"
+                        onClick={() => {
+                            this.props.previousStep(this.props.currentStep)
+                        }}>
+                        Back
+                        <span className="glyphicon glyphicon-chevron-left"></span>
+                    </button>
+                    <button
                         className="btn btn-success"
                         onClick={() => {
-                            this.props.getScore(this.props.allFrameworks, this.props.answers);
-                            this.props.nextStep(this.props.currentStep);
+                            this.props.nextStep(this.props.currentStep)
                         }}>
-                        Continue
-                        <span className="glyphicon glyphicon-play"/>
+                        Next
+                        <span className="glyphicon glyphicon-chevron-right"></span>
                     </button>
                 </div>
             </div>
@@ -90,5 +97,6 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
     nextStep: nextStep,
+    previousStep: previousStep,
     addAnswer: addAnswer,
     getScore: getScore})(S11);

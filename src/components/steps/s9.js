@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, addAnswer} from '../../actions/index';
+import {nextStep, addAnswer, previousStep} from '../../actions/index';
 import Question from '../question';
 
 class S9 extends Component {
@@ -127,12 +127,20 @@ class S9 extends Component {
 
                 <div>
                     <button
+                        className="btn btn-info"
+                        onClick={() => {
+                            this.props.previousStep(this.props.currentStep)
+                        }}>
+                        Back
+                        <span className="glyphicon glyphicon-chevron-left"></span>
+                    </button>
+                    <button
                         className="btn btn-success"
                         onClick={() => {
                             this.props.nextStep(this.props.currentStep)
                         }}>
-                        Continue
-                        <span className="glyphicon glyphicon-play"/>
+                        Next
+                        <span className="glyphicon glyphicon-chevron-right"></span>
                     </button>
                 </div>
             </div>
@@ -149,4 +157,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
     nextStep: nextStep,
+    previousStep: previousStep,
     addAnswer: addAnswer})(S9);
