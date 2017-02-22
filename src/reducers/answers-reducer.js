@@ -29,6 +29,7 @@ const defaultAnswers = {
     invokeNative: false,
     crash: false,
     complex: 0,
+    popularity: 0,
     designer: false,
     tablet: false,
     osOverrides: false,

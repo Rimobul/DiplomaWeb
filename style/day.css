@@ -47,3 +47,15 @@
     max-width: 350px;
     max-height: 350px;
 }
+
+.table-striped>tbody>tr.green{
+    background-color: lightgreen !important;
+}
+
+.table-striped>tbody>tr.red{
+    background-color: lightcoral !important;
+}
+
+.table-striped>tbody>tr.yellow{
+    background-color: lightgoldenrodyellow !important;
+}

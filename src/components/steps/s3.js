@@ -120,7 +120,8 @@ class S3 extends Component {
                     <button
                         className="btn btn-success"
                         onClick={() => {
-                            this.props.nextStep(this.props.currentStep)
+                            this.props.getScore(this.props.allFrameworks, this.props.answers);
+                            this.props.nextStep(this.props.currentStep);
                         }}>
                         Next
                         <span className="glyphicon glyphicon-chevron-right"></span>

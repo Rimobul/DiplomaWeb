@@ -76,6 +76,7 @@ class S11 extends Component {
                     <button
                         className="btn btn-success"
                         onClick={() => {
+                            this.props.getScore(this.props.allFrameworks, this.props.answers);
                             this.props.nextStep(this.props.currentStep)
                         }}>
                         Next
