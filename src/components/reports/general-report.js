@@ -22,7 +22,7 @@ export default class GeneralReport extends Component{
         return(
             <tbody>
                 <tr className={getBackgroundClass(isEqualOrMore(this.answers.complex, this.framework.performance))}>
-                    <td>App complexity and performace</td>
+                    <td>App complexity and performance</td>
                     <td span="2">{this.appPerformanceArray[this.framework.performance]}</td>
                 </tr>
                 <tr className={getBackgroundClass(this.answers.popularity, this.framework.popularity)}>

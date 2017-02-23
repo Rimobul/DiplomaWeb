@@ -1,5 +1,21 @@
 import React from 'react';
 
+export function getPriceBackgroundClass(expectedCategory, actualCategory, exptectedPrice, actualPrice) {
+    if(expectedCategory == actualCategory){
+        if(actualPrice <= exptectedPrice){
+            return "green";
+        } else return "red";
+    } else return "gray";
+}
+
+export function getSingleUiBackgroundClass(singleUi, possibleArray) {
+    if(singleUi){
+        return possibleArray.some(a => a == "Single") ? "green" : "red";
+    } else {
+        return possibleArray.some(a => a == "Custom") ? "green" : "red";
+    }
+}
+
 export function getBackgroundClass(expected, actual){
     if(expected == null || expected == true){
         if(actual == null){

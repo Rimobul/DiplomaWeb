@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import PlatformsReport from './platforms-report';
 import DesktopReport from './desktop-report';
 import GeneralReport from './general-report';
+import PriceReport from './price-report';
+import UiReport from './ui-report';
+import SensorsReport from './sensors-report';
 
 export default class ReportWrapper extends Component {
     constructor(props){
@@ -49,6 +52,30 @@ export default class ReportWrapper extends Component {
                         </tr>
                         </thead>
                         <GeneralReport framework={this.framework} answers={this.answers} />
+                    </table>
+                    <table className="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Pricing</th>
+                        </tr>
+                        </thead>
+                        <PriceReport framework={this.framework} answers={this.answers} />
+                    </table>
+                    <table className="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>UI</th>
+                        </tr>
+                        </thead>
+                        <UiReport framework={this.framework} answers={this.answers} />
+                    </table>
+                    <table className="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Sensors</th>
+                        </tr>
+                        </thead>
+                        <SensorsReport framework={this.framework} answers={this.answers} />
                     </table>
                 </div>
             </div>
