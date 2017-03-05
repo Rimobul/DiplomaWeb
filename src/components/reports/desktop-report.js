@@ -23,12 +23,12 @@ export default class DesktopReport extends Component {
                     {renderComment(this.framework.desktopOs.macOs[1])}
                 </tr>
                 <tr className={getBackgroundClass(this.answers.windows, this.framework.desktopOs.windows[0])}>
-                    <td>iOS</td>
+                    <td>Windows</td>
                     <td>{yesNo(this.framework.desktopOs.windows[0])}</td>
                     {renderComment(this.framework.desktopOs.windows[1])}
                 </tr>
                 <tr className={getBackgroundClass(this.answers.web, this.framework.desktopOs.web[0])}>
-                    <td>Windows</td>
+                    <td>Web environment</td>
                     <td>{yesNo(this.framework.desktopOs.web[0])}</td>
                     {renderComment(this.framework.desktopOs.web[1])}
                 </tr>

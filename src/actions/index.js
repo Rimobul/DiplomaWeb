@@ -16,6 +16,12 @@ export function previousStep(currentStep){
     };
 }
 
+export function resetAnswers() {
+    return {
+        type: ADD_ANSWER
+    };
+}
+
 export function resetSteps() {
     return {
         type: CURRENT_STEP,

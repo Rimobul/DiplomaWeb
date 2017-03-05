@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {nextStep, resetSteps, previousStep} from '../../actions/index';
+import {nextStep, resetSteps, previousStep, resetAnswers} from '../../actions/index';
 import ReportWrapper from '../reports/report-wrapper';
 
 class S4 extends Component {
@@ -21,7 +21,10 @@ class S4 extends Component {
                 <div>
                     <button
                         className="btn btn-default"
-                        onClick={() => this.props.resetSteps()}>
+                        onClick={() => {
+                            this.props.resetAnswers();
+                            this.props.resetSteps();
+                        }}>
                         Back to main page
                     </button>
                     <button
@@ -61,4 +64,5 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
     nextStep: nextStep,
     previousStep: previousStep,
-    resetSteps: resetSteps})(S4);
+    resetSteps: resetSteps,
+    resetAnswers: resetAnswers})(S4);

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {resetSteps, previousStep} from '../../actions/index';
+import {resetSteps, previousStep, resetAnswers} from '../../actions/index';
 
 class S13 extends Component {
     componentDidMount() {
@@ -86,7 +86,10 @@ class S13 extends Component {
                     </button>
                     <button
                         className="btn btn-default"
-                        onClick={() => this.props.resetSteps()}>
+                        onClick={() => {
+                            this.props.resetAnswers();
+                            this.props.resetSteps();
+                        }}>
                         Back to main page
                     </button>
                 </div>
@@ -104,4 +107,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
     previousStep: previousStep,
-    resetSteps: resetSteps})(S13);
+    resetSteps: resetSteps,
+    resetAnswers: resetAnswers})(S13);
