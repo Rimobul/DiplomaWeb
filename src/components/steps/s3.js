@@ -34,8 +34,13 @@ class S3 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {background: true})}/>Yes<br />
                     <input type="radio"
                            name="background"
+                           value="Maybe"
+                           checked={this.props.answers.background == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {background: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="background"
                            value="No"
-                           checked={!this.props.answers.background}
+                           checked={this.props.answers.background == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {background: false})}/>No<br />
                 </Question>
 
@@ -62,8 +67,13 @@ class S3 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {push: true})}/>Yes<br />
                     <input type="radio"
                            name="push"
+                           value="Maybe"
+                           checked={this.props.answers.push == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {push: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="push"
                            value="No"
-                           checked={!this.props.answers.push}
+                           checked={this.props.answers.push == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {push: false})}/>No<br />
                 </Question>
 
@@ -82,8 +92,13 @@ class S3 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {invokeNative: true})}/>Yes<br />
                     <input type="radio"
                            name="invokeNative"
+                           value="Maybe"
+                           checked={this.props.answers.invokeNative == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {invokeNative: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="invokeNative"
                            value="No"
-                           checked={!this.props.answers.invokeNative}
+                           checked={this.props.answers.invokeNative == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {invokeNative: false})}/>No<br />
                 </Question>
 
@@ -103,8 +118,13 @@ class S3 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {crash: true})}/>Yes<br />
                     <input type="radio"
                            name="crash"
+                           value="Maybe"
+                           checked={this.props.answers.crash == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {crash: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="crash"
                            value="No"
-                           checked={!this.props.answers.crash}
+                           checked={this.props.answers.crash == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {crash: false})}/>No<br />
                 </Question>
 

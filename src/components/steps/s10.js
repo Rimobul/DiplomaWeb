@@ -29,8 +29,13 @@ class S10 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {multitest: true})}/>Yes<br />
                     <input type="radio"
                            name="multitest"
+                           value="Maybe"
+                           checked={this.props.answers.multitest == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {multitest: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="multitest"
                            value="No"
-                           checked={!this.props.answers.multitest}
+                           checked={this.props.answers.multitest == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {multitest: false})}/>No<br />
                 </Question>
 
@@ -48,8 +53,13 @@ class S10 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {ci: true})}/>Yes<br />
                     <input type="radio"
                            name="ci"
+                           value="Maybe"
+                           checked={this.props.answers.ci == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {ci: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="ci"
                            value="No"
-                           checked={!this.props.answers.ci}
+                           checked={this.props.answers.ci == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {ci: false})}/>No<br />
                 </Question>
 
@@ -66,8 +76,13 @@ class S10 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {closedGroups: true})}/>Yes<br />
                     <input type="radio"
                            name="closedGroups"
+                           value="Maybe"
+                           checked={this.props.answers.closedGroups == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {closedGroups: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="closedGroups"
                            value="No"
-                           checked={!this.props.answers.closedGroups}
+                           checked={this.props.answers.closedGroups == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {closedGroups: false})}/>No<br />
                 </Question>
 

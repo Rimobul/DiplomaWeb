@@ -23,8 +23,13 @@ class S6 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {files: true})}/>Yes<br />
                     <input type="radio"
                            name="files"
+                           value="Maybe"
+                           checked={this.props.answers.files == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {files: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="files"
                            value="No"
-                           checked={!this.props.answers.files}
+                           checked={this.props.answers.files == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {files: false})}/>No<br />
                 </Question>
 
@@ -53,7 +58,10 @@ class S6 extends Component {
                     <input type="checkbox"
                            checked={this.props.answers.otherDb}
                            onClick={() => this.props.addAnswer(this.props.answers, {otherDb: !this.props.answers.otherDb})}/>
-                    Other<br/>
+                    Other database<br/>
+                    <input type="checkbox"
+                            checked={this.props.answers.appProperties}
+                            onClick={() => this.props.addAnswer(this.props.answers, {appProperties: !this.props.answers.appProperties})}/>
                 </Question>
 
                 <Question

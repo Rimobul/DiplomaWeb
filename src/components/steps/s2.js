@@ -85,8 +85,13 @@ class S2 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {multithreading: true})}/>Yes<br />
                     <input type="radio"
                            name="multithreading"
+                           value="Maybe"
+                           checked={this.props.answers.multithreading == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {multithreading: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="multithreading"
                            value="No"
-                           checked={!this.props.answers.multithreading}
+                           checked={this.props.answers.multithreading == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {multithreading: false})}/>No<br />
                 </Question>
 
@@ -151,8 +156,13 @@ class S2 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {deviceState: true})}/>Yes<br />
                     <input type="radio"
                            name="deviceState"
+                           value="Maybe"
+                           checked={this.props.answers.deviceState == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {deviceState: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="deviceState"
                            value="No"
-                           checked={!this.props.answers.deviceState}
+                           checked={this.props.answers.deviceState == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {deviceState: false})}/>No<br />
                 </Question>
 

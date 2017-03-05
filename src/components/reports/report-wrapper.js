@@ -5,6 +5,7 @@ import GeneralReport from './general-report';
 import PriceReport from './price-report';
 import UiReport from './ui-report';
 import SensorsReport from './sensors-report';
+import ApiReport from './api-report';
 
 export default class ReportWrapper extends Component {
     constructor(props){
@@ -76,6 +77,14 @@ export default class ReportWrapper extends Component {
                         </tr>
                         </thead>
                         <SensorsReport framework={this.framework} answers={this.answers} />
+                    </table>
+                    <table className="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>APIs</th>
+                        </tr>
+                        </thead>
+                        <ApiReport framework={this.framework} answers={this.answers} />
                     </table>
                 </div>
             </div>

@@ -116,6 +116,7 @@ export default function (state = [], action) {
                 points += answersMatrixValue(action.payload.answers.sqlite, f.databases.some(d => d === "SQLite"), 5);
                 points += answersMatrixValue(action.payload.answers.otherDb, f.databases.some(d => d != "SQLite" &&
                     d != "Realm" && d != "Couchbase"), 5);
+                points += answersMatrixValue(action.payload.answers.appProperties, f.apis.appProperties[0], 5);
                 points += answersMatrixValue(action.payload.answers.bluetooth, f.sensors.bluetooth[0], 5);
                 points += answersMatrixValue(action.payload.answers.nfc, f.sensors.nfc[0], 5);
                 points += answersMatrixValue(action.payload.answers.fingerprint, f.sensors.fingerprint[0], 5);

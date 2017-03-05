@@ -13,7 +13,11 @@ class S5 extends Component {
             <div>
                 <Question
                     question="How would you characterize the complexity of your app?"
-                    note="TBD">
+                    note="Complexity of the application can help to determine which tool and programming language to
+                    choose. Simple, straight-forward applications can take advantage of the rapid prototyping provided
+                    by hybrid mobile applications and tools using scripting languages. Larger and more complex projects
+                    should be programmed in a strongly-typed programming language featuring object-oriented programming
+                    and separation of code into modules.">
                     <input type="radio"
                            name="complex"
                            value="0"
@@ -48,8 +52,13 @@ class S5 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {designer: true})}/>Yes<br />
                     <input type="radio"
                            name="designer"
+                           value="Maybe"
+                           checked={this.props.answers.designer == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {designer: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="designer"
                            value="No"
-                           checked={!this.props.answers.designer}
+                           checked={this.props.answers.designer == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {designer: false})}/>No<br />
                 </Question>
 
@@ -69,8 +78,13 @@ class S5 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {tablet: true})}/>Yes<br />
                     <input type="radio"
                            name="tablet"
+                           value="Maybe"
+                           checked={this.props.answers.tablet == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {tablet: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="tablet"
                            value="No"
-                           checked={!this.props.answers.tablet}
+                           checked={this.props.answers.tablet == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {tablet: false})}/>No<br />
                 </Question>
 
@@ -88,8 +102,13 @@ class S5 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {osOverrides: true})}/>Yes<br />
                     <input type="radio"
                            name="osOverrides"
+                           value="Maybe"
+                           checked={this.props.answers.osOverrides == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {osOverrides: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="osOverrides"
                            value="No"
-                           checked={!this.props.answers.osOverrides}
+                           checked={this.props.answers.osOverrides == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {osOverrides: false})}/>No<br />
                 </Question>
 

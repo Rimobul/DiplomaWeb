@@ -1,5 +1,30 @@
 import React from 'react';
 
+export function getDatabaseBackgroundClass(answers, framework) {
+    let result = [];
+    if(answers.couchbase){
+        result.push(framework.databases.some(d => d == "Couchbase"));
+    }
+    if(answers.realm){
+        result.push(framework.databases.some(d => d == "Realm"));
+    }
+    if(answers.sqlite){
+        result.push(framework.databases.some(d => d == "SQLite"));
+    }
+    if(answers.otherDb){
+        result.push(framework.databases.some(d => d != "SQLite" &&
+            d != "Realm" && d != "Couchbase"));
+    }
+
+    if(result.length == 0){
+        return "gray";
+    } else if(result.every(item => item)){
+        return "green";
+    } else if (result.every(item => !item)){
+        return "red";
+    } else return "yellow";
+}
+
 export function getPriceBackgroundClass(expectedCategory, actualCategory, exptectedPrice, actualPrice) {
     if(expectedCategory == actualCategory){
         if(actualPrice <= exptectedPrice){

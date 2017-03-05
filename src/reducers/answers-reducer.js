@@ -34,6 +34,7 @@ const defaultAnswers = {
     tablet: false,
     osOverrides: false,
     files: false,
+    appProperties: false,
     couchbase: false,
     realm: false,
     sqlite: false,

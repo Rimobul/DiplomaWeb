@@ -27,8 +27,13 @@ class S1 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {iOSnonMac: true})}/>Yes<br />
                     <input type="radio"
                            name="iOSnonMac"
+                           value="Maybe"
+                           checked={this.props.answers.iOSnonMac == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {iOSnonMac: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="iOSnonMac"
                            value="No"
-                           checked={!this.props.answers.iOSnonMac}
+                           checked={this.props.answers.iOSnonMac == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {iOSnonMac: false})}/>No<br />
                 </Question>
             );
@@ -50,6 +55,11 @@ class S1 extends Component {
                            value="Yes"
                            checked={this.props.answers.winNonWin}
                            onChange={() => this.props.addAnswer(this.props.answers, {winNonWin: true})}/>Yes<br />
+                    <input type="radio"
+                           name="winNonWin"
+                           value="Maybe"
+                           checked={this.props.answers.winNonWin == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {winNonWin: null})}/>Nice to have<br />
                     <input type="radio"
                            name="winNonWin"
                            value="No"

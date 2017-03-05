@@ -25,8 +25,13 @@ class S11 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {openGl: true})}/>Yes<br />
                     <input type="radio"
                            name="openGl"
+                           value="Maybe"
+                           checked={this.props.answers.openGl == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {openGl: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="openGl"
                            value="No"
-                           checked={!this.props.answers.openGl}
+                           checked={this.props.answers.openGl == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {openGl: false})}/>No<br />
                 </Question>
 
@@ -42,8 +47,13 @@ class S11 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {games: true})}/>Yes<br />
                     <input type="radio"
                            name="games"
+                           value="Maybe"
+                           checked={this.props.answers.games == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {games: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="games"
                            value="No"
-                           checked={!this.props.answers.games}
+                           checked={this.props.answers.games == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {games: false})}/>No<br />
                 </Question>
 
@@ -59,8 +69,13 @@ class S11 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {avr: true})}/>Yes<br />
                     <input type="radio"
                            name="avr"
+                           value="Maybe"
+                           checked={this.props.answers.avr == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {avr: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="avr"
                            value="No"
-                           checked={!this.props.answers.avr}
+                           checked={this.props.answers.avr == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {avr: false})}/>No<br />
                 </Question>
 

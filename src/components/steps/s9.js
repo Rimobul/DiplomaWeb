@@ -83,8 +83,13 @@ class S9 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {mbaas: true})}/>Yes<br />
                     <input type="radio"
                            name="mbaas"
+                           value="Maybe"
+                           checked={this.props.answers.mbaas == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {mbaas: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="mbaas"
                            value="No"
-                           checked={!this.props.answers.mbaas}
+                           checked={this.props.answers.mbaas == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {mbaas: false})}/>No<br />
                 </Question>
 
@@ -102,8 +107,13 @@ class S9 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {browser: true})}/>Yes<br />
                     <input type="radio"
                            name="browser"
+                           value="Maybe"
+                           checked={this.props.answers.browser == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {browser: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="browser"
                            value="No"
-                           checked={!this.props.answers.browser}
+                           checked={this.props.answers.browser == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {browser: false})}/>No<br />
                 </Question>
 
@@ -120,8 +130,13 @@ class S9 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {call: true})}/>Yes<br />
                     <input type="radio"
                            name="call"
+                           value="Maybe"
+                           checked={this.props.answers.call == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {call: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="call"
                            value="No"
-                           checked={!this.props.answers.call}
+                           checked={this.props.answers.call == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {call: false})}/>No<br />
                 </Question>
 

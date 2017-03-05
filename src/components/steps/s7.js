@@ -22,8 +22,13 @@ class S7 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {debug: true})}/>Yes<br />
                     <input type="radio"
                            name="debug"
+                           value="Maybe"
+                           checked={this.props.answers.debug == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {debug: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="debug"
                            value="No"
-                           checked={!this.props.answers.debug}
+                           checked={this.props.answers.debug == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {debug: false})}/>No<br />
                 </Question>
 
@@ -40,8 +45,13 @@ class S7 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {unit: true})}/>Yes<br />
                     <input type="radio"
                            name="unit"
+                           value="Maybe"
+                           checked={this.props.answers.unit == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {unit: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="unit"
                            value="No"
-                           checked={!this.props.answers.unit}
+                           checked={this.props.answers.unit == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {unit: false})}/>No<br />
                 </Question>
 
@@ -58,8 +68,13 @@ class S7 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {uiTesting: true})}/>Yes<br />
                     <input type="radio"
                            name="uiTesting"
+                           value="Maybe"
+                           checked={this.props.answers.uiTesting == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {uiTesting: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="uiTesting"
                            value="No"
-                           checked={!this.props.answers.uiTesting}
+                           checked={this.props.answers.uiTesting == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {uiTesting: false})}/>No<br />
                 </Question>
 
@@ -75,8 +90,13 @@ class S7 extends Component {
                            onChange={() => this.props.addAnswer(this.props.answers, {profiling: true})}/>Yes<br />
                     <input type="radio"
                            name="profiling"
+                           value="Maybe"
+                           checked={this.props.answers.profiling == null}
+                           onChange={() => this.props.addAnswer(this.props.answers, {profiling: null})}/>Nice to have<br />
+                    <input type="radio"
+                           name="profiling"
                            value="No"
-                           checked={!this.props.answers.profiling}
+                           checked={this.props.answers.profiling == false}
                            onChange={() => this.props.addAnswer(this.props.answers, {profiling: false})}/>No<br />
                 </Question>
 
