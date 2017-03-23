@@ -365,7 +365,7 @@ export const FrameworksArray = [
         web: "https://www.codenameone.com/",
         image: "https://res.cloudinary.com/crunchbase-production/image/upload/v1397185054/3d6c475b1666918e17f4348756162dbd.png",
         score: 0,
-        performance: 2,
+        performance: 1,
         popularity: 6,
         apis: {
             audio: [true],
@@ -388,8 +388,8 @@ export const FrameworksArray = [
             macOs: [true],
             windows: [true],
             web: [false],
-            iOSnonMac: [false],
-            winNonWin: [false],
+            iOSnonMac: [true],
+            winNonWin: [true],
         },
         games: [true],
         invokeNative: [true],
@@ -482,7 +482,7 @@ export const FrameworksArray = [
             windows: [true]
         },
         mbaas: [false, custom3],
-        multithreading: [false],
+        multithreading: [null, "Can be partially substituted by Lua co-routines."],
         openGl: [true],
         osOverrides: [true],
         prices: {
@@ -916,7 +916,7 @@ export const FrameworksArray = [
             ci: [null, "Partially possible, depending on selected IDE."],
             debugging: [null, "Partially possible, depending on selected IDE."],
             groupShipping: [null, defaultAppStores],
-            multiTesting: [null, defaultMultiTesting],
+            multiTesting: [false],
             uiTest: [false],
             unitTest: [true],
         },
@@ -1039,7 +1039,7 @@ export const FrameworksArray = [
             iOSnonMac: [false],
             winNonWin: [false],
         },
-        games: [],
+        games: [false],
         invokeNative: [true],
         languages: [js],
         mobileOs: {
@@ -1188,7 +1188,7 @@ export const FrameworksArray = [
             addressBook: [null, custom3],
             callSms: [null, custom3]
         },
-        approach: [interpreted],
+        approach: [crossCompiled],
         assistants: [],
         augmentedVirtual: [false],
         backgrounding: [true],
