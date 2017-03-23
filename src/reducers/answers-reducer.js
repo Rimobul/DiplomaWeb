@@ -28,7 +28,7 @@ const defaultAnswers = {
     push: false,
     invokeNative: false,
     crash: false,
-    complex: 0,
+    complex: -1,
     popularity: 0,
     designer: false,
     tablet: false,
