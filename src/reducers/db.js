@@ -285,7 +285,7 @@ export const FrameworksArray = [
         image: "https://p3.zdassets.com/hc/settings_assets/888596/200136495/ABxUb2iBNfC44zD791SifA-top_logo.png",
         score: 0,
         performance: 0,
-        popularity: 1,
+        popularity: 2,
         apis: {
             audio: [true],
             video: [true],
@@ -447,7 +447,7 @@ export const FrameworksArray = [
         image: "https://coronalabs.com/wp-content/uploads/2013/10/Flat_Corona_250x250.png",
         score: 0,
         performance: 1,
-        popularity: 7,
+        popularity: 8,
         apis: {
             audio: [true],
             video: [true],
@@ -690,7 +690,7 @@ export const FrameworksArray = [
         image: "http://www.instantdeveloper.com/assets/logo-8e71db7111402e079a7f653c06362f53.png",
         score: 0,
         performance: 0,
-        popularity: 2,
+        popularity: 3,
         apis: {
             audio: [true],
             video: [false],
@@ -770,7 +770,7 @@ export const FrameworksArray = [
         web: "http://ionicframework.com/",
         image: "http://ecodile.com/wp-content/uploads/2015/10/ionic.png",
         score: 0,
-        performance: 1,
+        performance: 0,
         popularity: 9,
         apis: {
             audio: [true],
@@ -933,7 +933,7 @@ export const FrameworksArray = [
         image: "https://res.cloudinary.com/crunchbase-production/image/upload/v1446047799/fiw2eossbkplsfyy3to1.png",
         score: 0,
         performance: 1,
-        popularity: 4,
+        popularity: 5,
         apis: {
             audio: [true],
             video: [true],
@@ -1165,7 +1165,7 @@ export const FrameworksArray = [
         },
         ui: {
             designer: [false],
-            nativeLook: [true],
+            nativeLook: [null, "Both native and non-native looks achievable."],
             tabletLayout: [true],
             uiLayers: [single, custom],
         }
@@ -1570,7 +1570,7 @@ export const FrameworksArray = [
         },
         ui: {
             designer: [false],
-            nativeLook: [false],
+            nativeLook: [null, "Both native and non-native looks achievable."],
             tabletLayout: [true],
             uiLayers: [single, custom],
         }
@@ -1666,10 +1666,10 @@ export const FrameworksArray = [
         apis: {
             audio: [true],
             video: [true],
-            deviceStatus: [true],
+            deviceStatus: [null, "Only certain information are available."],
             pushNotifications: [true],
             fileSystem: [true],
-            appProperties: [null, "Only certain information are available."],
+            appProperties: [true],
             embeddedBrowser: [false],
             addressBook: [true],
             callSms: [true]
@@ -1960,7 +1960,7 @@ export const FrameworksArray = [
             gyroscope: [true],
             bluetooth: [false],
             nfc: [null, "Available only for Android."],
-            fingerprint: [null, "Available only for "],
+            fingerprint: [null, "Available only for iOS."],
             barcode: [true]
         },
         testing: {
@@ -1998,7 +1998,7 @@ export const FrameworksArray = [
             addressBook: [true],
             callSms: [true]
         },
-        approach: [interpreted],
+        approach: [crossCompiled],
         assistants: [alexa, cortana, googleAssistant, siri],
         augmentedVirtual: [true],
         backgrounding: [true],
